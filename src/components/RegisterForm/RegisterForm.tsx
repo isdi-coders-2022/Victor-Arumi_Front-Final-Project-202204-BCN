@@ -2,10 +2,9 @@ import { ChangeEvent, useState } from "react";
 import FormStyled from "./FormStyled";
 import "@fontsource/urbanist";
 
-interface IRegisterForm {
-  username: string;
-  password: string;
-}
+import { IRegisterForm } from "../../types/types";
+import registerThunk from "../../redux/thunks/registerThunk";
+import { useAppDispatch } from "../../redux/store/hooks";
 
 const RegisterForm = (): JSX.Element => {
   const initialEmptyFormValues: IRegisterForm = {
@@ -19,6 +18,13 @@ const RegisterForm = (): JSX.Element => {
 
   const changeData = (event: ChangeEvent<HTMLInputElement>): void => {
     setFormData({ ...formData, [event.target.id]: event.target.value });
+  };
+
+  const dispatch = useAppDispatch();
+  const registerSubmit = (event: { preventDefault: () => void }) => {
+    event.preventDefault();
+    dispatch(registerThunk(formData));
+    setFormData(initialEmptyFormValues);
   };
 
   return (
@@ -43,7 +49,11 @@ const RegisterForm = (): JSX.Element => {
             />
           </label>
         </div>
-        <button className="submit-button" type="submit">
+        <button
+          className="submit-button"
+          type="submit"
+          onClick={registerSubmit}
+        >
           Crear cuenta
         </button>
       </form>
