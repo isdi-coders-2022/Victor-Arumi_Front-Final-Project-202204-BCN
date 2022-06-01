@@ -1,26 +1,33 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RegisterPayload, UserSliceState } from "../../types/types";
+import {
+  LogInPayload,
+  RegisterPayload,
+  UserSliceState,
+} from "../../types/types";
 
-const initialState = {
+const initialState: UserSliceState = {
   username: "",
   name: "",
   profilePicture: "",
-  logged: false,
-} as UserSliceState;
+  logged: localStorage.getItem("token") ? true : false,
+};
 
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
     register: (user, action: PayloadAction<RegisterPayload>) => ({
+      ...user,
+      username: action.payload.username,
+    }),
+    logIn: (user, action: PayloadAction<LogInPayload>) => ({
       ...action.payload,
-      name: "",
-      profilePicture: "",
-      logged: false,
+      logged: true,
     }),
   },
 });
 
-export const { register: registerActionCreator } = userSlice.actions;
+export const { register: registerActionCreator, logIn: logInActionCreator } =
+  userSlice.actions;
 
 export default userSlice.reducer;
