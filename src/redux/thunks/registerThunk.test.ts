@@ -1,8 +1,8 @@
 import { server } from "../../mocks/server";
 
 import { Dispatch } from "@reduxjs/toolkit";
-import { User } from "../../types/types";
 import registerThunk from "./registerThunk";
+import { mockNewUser } from "../../mocks/handlers";
 
 beforeEach(() => server.listen());
 afterEach(() => server.resetHandlers);
@@ -13,10 +13,7 @@ describe("Given a registerThunk", () => {
     test("Then it should call dispatch", async () => {
       const dispatch: Dispatch = jest.fn();
 
-      const userData: User = {
-        username: "Nicolas",
-        password: "Cage",
-      };
+      const userData = mockNewUser;
 
       const thunk = registerThunk(userData);
 
