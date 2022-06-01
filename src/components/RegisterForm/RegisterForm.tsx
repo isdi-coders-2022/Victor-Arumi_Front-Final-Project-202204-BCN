@@ -7,14 +7,12 @@ import registerThunk from "../../redux/thunks/registerThunk";
 import { useAppDispatch } from "../../redux/store/hooks";
 
 const RegisterForm = (): JSX.Element => {
-  const initialEmptyFormValues: IRegisterForm = {
+  const emptyFormValues: IRegisterForm = {
     username: "",
     password: "",
   };
 
-  const [formData, setFormData] = useState<IRegisterForm>(
-    initialEmptyFormValues
-  );
+  const [formData, setFormData] = useState<IRegisterForm>(emptyFormValues);
 
   const changeData = (event: ChangeEvent<HTMLInputElement>): void => {
     setFormData({ ...formData, [event.target.id]: event.target.value });
@@ -25,7 +23,7 @@ const RegisterForm = (): JSX.Element => {
   const registerSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
     dispatch(registerThunk(formData));
-    setFormData(initialEmptyFormValues);
+    setFormData(emptyFormValues);
   };
 
   return (
