@@ -3,7 +3,7 @@ import { User } from "../../types/types";
 
 interface State {
   userData: User;
-  logged: Boolean;
+  logged: boolean;
 }
 
 const initialState: State = {
