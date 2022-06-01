@@ -21,6 +21,7 @@ const RegisterForm = (): JSX.Element => {
   };
 
   const dispatch = useAppDispatch();
+
   const registerSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
     dispatch(registerThunk(formData));
