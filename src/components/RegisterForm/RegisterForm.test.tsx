@@ -9,7 +9,7 @@ import store from "../../redux/store";
 describe("Given a RegisterForm component", () => {
   describe("When the text 'typing...' is typed in the username input field", () => {
     test("Then the value of the username input field shoul be 'typing...", () => {});
-    const usernamePlaceholder = "username";
+    const usernameInputName = "Nombre de usuario";
     const typedText = "typing...";
 
     render(
@@ -17,18 +17,19 @@ describe("Given a RegisterForm component", () => {
         <RegisterForm />
       </Provider>
     );
-    const input: HTMLInputElement =
-      screen.getByPlaceholderText(usernamePlaceholder);
+    const input: HTMLInputElement = screen.getByRole("textbox", {
+      name: usernameInputName,
+    });
     userEvent.type(input, typedText);
 
     expect(input).toHaveValue(typedText);
   });
 
   describe("When it's invoked", () => {
-    test("Then it should render 2 input fields with placeholder 'username' and 'password' and a 'Crear cuenta' button", () => {
-      const usernamePlaceholder = "username";
-      const passwordPlaceholder = "password";
+    test("Then it should render 3 input fields, a password input and a button with text'Crear cuenta'", () => {
+      const passwordInputLabelText = "Contraseña";
       const registerButtonText = "Crear cuenta";
+      const inputsNumber = 3;
 
       render(
         <Provider store={store}>
@@ -36,17 +37,16 @@ describe("Given a RegisterForm component", () => {
         </Provider>
       );
 
-      const usernameInput: HTMLInputElement =
-        screen.getByPlaceholderText(usernamePlaceholder);
-      const passwordInput: HTMLInputElement =
-        screen.getByPlaceholderText(passwordPlaceholder);
-
+      const inputs: HTMLInputElement[] = screen.getAllByRole("textbox");
+      const passwordLabel: HTMLElement = screen.getByLabelText(
+        passwordInputLabelText
+      );
       const button: HTMLElement = screen.getByRole("button", {
         name: registerButtonText,
       });
 
-      expect(usernameInput).toBeInTheDocument();
-      expect(passwordInput).toBeInTheDocument();
+      expect(inputs).toHaveLength(inputsNumber);
+      expect(passwordLabel).toBeInTheDocument();
       expect(button).toBeInTheDocument();
     });
   });

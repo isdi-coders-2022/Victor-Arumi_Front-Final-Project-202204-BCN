@@ -10,6 +10,8 @@ const RegisterForm = (): JSX.Element => {
   const emptyFormValues: IRegisterForm = {
     username: "",
     password: "",
+    name: "",
+    profilePicture: "",
   };
 
   const [formData, setFormData] = useState<IRegisterForm>(emptyFormValues);
@@ -31,20 +33,32 @@ const RegisterForm = (): JSX.Element => {
       <form className="register-form" autoComplete="off" noValidate>
         <div className="inputs-container">
           <label htmlFor="username">
+            Nombre de usuario
             <input
               id="username"
               value={formData.username}
               onChange={changeData}
-              placeholder="username"
             />
           </label>
           <label htmlFor="password">
+            Contraseña
             <input
               id="password"
               type="password"
               value={formData.password}
               onChange={changeData}
-              placeholder="password"
+            />
+          </label>
+          <label htmlFor="name">
+            Nombre
+            <input id="name" value={formData.name} onChange={changeData} />
+          </label>
+          <label htmlFor="profilePicture">
+            Imagen de perfil
+            <input
+              id="profilePicture"
+              value={formData.profilePicture}
+              onChange={changeData}
             />
           </label>
         </div>

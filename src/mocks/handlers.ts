@@ -1,11 +1,12 @@
 import { rest } from "msw";
+import { IRegisterForm } from "../types/types";
 
-const mockNewUser = {
-  username: "Nicolas",
-  password: "Cage",
+export const mockNewUser: IRegisterForm = {
+  username: "Michael",
+  password: "Jordan",
+  name: "Goat",
+  profilePicture: "Last_dance.jpg",
 };
-
-const mockToken = "token";
 
 export const handlers = [
   rest.post(
