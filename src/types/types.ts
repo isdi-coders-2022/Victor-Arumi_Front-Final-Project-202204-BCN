@@ -21,3 +21,8 @@ export interface IRegisterForm {
   name: string;
   profilePicture: string;
 }
+
+export interface ILoginForm {
+  username: string;
+  password: string;
+}
