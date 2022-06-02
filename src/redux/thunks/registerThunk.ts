@@ -8,7 +8,7 @@ interface RegisterApiResponse {
 }
 
 const registerThunk =
-  (userData: IRegisterForm) => async (dispatch: AppDispatch) => {
+  (userData: FormData | IRegisterForm) => async (dispatch: AppDispatch) => {
     const url: string = `${process.env.REACT_APP_API_URL}user/register`;
     const {
       data: { username },

@@ -33,10 +33,12 @@ describe("Given a RegisterForm component", () => {
   });
 
   describe("When it's invoked", () => {
-    test("Then it should render 3 input fields, a password input and a button with text'Crear cuenta'", () => {
+    test("Then it should render 2 input fields, a file and a password input and a button with text'Crear cuenta'", () => {
       const passwordInputLabelText = "Contraseña";
+      const profilePictureInputLabelText = "Imagen de perfil";
+
       const registerButtonText = "Crear cuenta";
-      const inputsNumber = 3;
+      const inputsNumber = 2;
 
       render(
         <Provider store={store}>
@@ -48,12 +50,18 @@ describe("Given a RegisterForm component", () => {
       const passwordLabel: HTMLElement = screen.getByLabelText(
         passwordInputLabelText
       );
+      const profilePictureLabel: HTMLElement = screen.getByLabelText(
+        profilePictureInputLabelText
+      );
+
       const button: HTMLElement = screen.getByRole("button", {
         name: registerButtonText,
       });
 
       expect(inputs).toHaveLength(inputsNumber);
       expect(passwordLabel).toBeInTheDocument();
+      expect(profilePictureLabel).toBeInTheDocument();
+
       expect(button).toBeInTheDocument();
     });
   });

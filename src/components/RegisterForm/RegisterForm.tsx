@@ -17,14 +17,28 @@ const RegisterForm = (): JSX.Element => {
   const [formData, setFormData] = useState<IRegisterForm>(emptyFormValues);
 
   const changeData = (event: ChangeEvent<HTMLInputElement>): void => {
-    setFormData({ ...formData, [event.target.id]: event.target.value });
+    setFormData({
+      ...formData,
+      [event.target.id]:
+        event.target.type === "file"
+          ? event.target.files?.[0] || ""
+          : event.target.value,
+    });
   };
 
   const dispatch = useAppDispatch();
 
   const registerSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    dispatch(registerThunk(formData));
+
+    const newFormData = new FormData();
+
+    newFormData.append("username", formData.username);
+    newFormData.append("password", formData.password);
+    newFormData.append("name", formData.name);
+    newFormData.append("profilePicture", formData.profilePicture);
+
+    dispatch(registerThunk(newFormData));
     setFormData(emptyFormValues);
   };
 
@@ -55,11 +69,7 @@ const RegisterForm = (): JSX.Element => {
           </label>
           <label htmlFor="profilePicture">
             Imagen de perfil
-            <input
-              id="profilePicture"
-              value={formData.profilePicture}
-              onChange={changeData}
-            />
+            <input id="profilePicture" type="file" onChange={changeData} />
           </label>
         </div>
         <button
