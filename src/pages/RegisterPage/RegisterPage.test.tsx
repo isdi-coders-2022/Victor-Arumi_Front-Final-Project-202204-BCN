@@ -10,7 +10,7 @@ describe("Given a RegisterPage component", () => {
     test("Then it should render 3 input fields, a password input and a button with text'Crear cuenta'", () => {
       const passwordInputLabelText = "Contraseña";
       const registerButtonText = "Crear cuenta";
-      const inputsNumber = 3;
+      const inputsNumber = 2;
 
       render(
         <BrowserRouter>
