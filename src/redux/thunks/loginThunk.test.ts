@@ -3,6 +3,7 @@ import { server } from "../../mocks/server";
 import { Dispatch } from "@reduxjs/toolkit";
 import { mockUserCredentials } from "../../mocks/handlers";
 import loginThunk from "./loginThunk";
+import { logInActionCreator } from "../features/userSlice";
 
 beforeEach(() => server.listen());
 afterEach(() => server.resetHandlers);
@@ -15,17 +16,25 @@ jest.mock("jwt-decode", () => () => ({
 }));
 
 describe("Given a loginThunk", () => {
-  describe("When it is called", () => {
-    test("Then it should call dispatch", async () => {
+  describe("When it is called with login credentials", () => {
+    test("Then it should call dispatch with a login action", async () => {
       const dispatch: Dispatch = jest.fn();
 
-      const userData = mockUserCredentials;
+      const payload = {
+        username: "Gerard",
+        name: "Pique",
+        profilePicture: "Bernabeu",
+      };
 
-      const thunk = loginThunk(userData);
+      const loginAction = logInActionCreator(payload);
+
+      const userLoginData = mockUserCredentials;
+
+      const thunk = loginThunk(userLoginData);
 
       await thunk(dispatch);
 
-      expect(dispatch).toHaveBeenCalled();
+      expect(dispatch).toHaveBeenCalledWith(loginAction);
     });
   });
 });
