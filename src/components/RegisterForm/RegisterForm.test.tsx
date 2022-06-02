@@ -6,6 +6,13 @@ import RegisterForm from "./RegisterForm";
 import { Provider } from "react-redux";
 import store from "../../redux/store";
 
+const mockDispatch = jest.fn();
+
+jest.mock("react-redux", () => ({
+  ...jest.requireActual("react-redux"),
+  useDispatch: () => mockDispatch,
+}));
+
 describe("Given a RegisterForm component", () => {
   describe("When the text 'typing...' is typed in the username input field", () => {
     test("Then the value of the username input field shoul be 'typing...", () => {});
@@ -48,6 +55,23 @@ describe("Given a RegisterForm component", () => {
       expect(inputs).toHaveLength(inputsNumber);
       expect(passwordLabel).toBeInTheDocument();
       expect(button).toBeInTheDocument();
+    });
+  });
+
+  describe("When invoked and the user clicks on 'Crear cuenta' button", () => {
+    test("Then it should call dispatch", () => {
+      const buttonText = "Crear cuenta";
+
+      render(
+        <Provider store={store}>
+          <RegisterForm />
+        </Provider>
+      );
+
+      const loginButton = screen.getByRole("button", { name: buttonText });
+      userEvent.click(loginButton);
+
+      expect(mockDispatch).toHaveBeenCalled();
     });
   });
 });

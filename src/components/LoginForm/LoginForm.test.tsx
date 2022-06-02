@@ -1,10 +1,16 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-
 import { Provider } from "react-redux";
 import store from "../../redux/store";
 import LoginForm from "./LoginForm";
+
+const mockDispatch = jest.fn();
+
+jest.mock("react-redux", () => ({
+  ...jest.requireActual("react-redux"),
+  useDispatch: () => mockDispatch,
+}));
 
 describe("Given a LoginForm component", () => {
   describe("When the text 'typing...' is typed in the username input field", () => {
@@ -48,6 +54,23 @@ describe("Given a LoginForm component", () => {
       expect(inputs).toHaveLength(inputsNumber);
       expect(passwordLabel).toBeInTheDocument();
       expect(button).toBeInTheDocument();
+    });
+  });
+
+  describe("When invoked and the user clicks on 'Entrar' button", () => {
+    test("Then it should call dispatch", () => {
+      const buttonText = "Entrar";
+
+      render(
+        <Provider store={store}>
+          <LoginForm />
+        </Provider>
+      );
+
+      const loginButton = screen.getByRole("button", { name: buttonText });
+      userEvent.click(loginButton);
+
+      expect(mockDispatch).toHaveBeenCalled();
     });
   });
 });
