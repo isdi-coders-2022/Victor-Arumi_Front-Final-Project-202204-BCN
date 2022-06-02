@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 const FormStyled = styled.div`
-  margin-top: 8rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,15 +9,16 @@ const FormStyled = styled.div`
 
   .register-form {
     display: flex;
+    align-items: center;
     flex-direction: column;
     gap: 0.5rem;
-    width: 22rem;
   }
 
   label {
-    width: 0;
-    margin: 0;
-    background-color: #f2f2f2;
+    width: 200px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    text-align: left;
   }
   .inputs-container {
     display: flex;
@@ -29,6 +29,7 @@ const FormStyled = styled.div`
   input {
     width: 12rem;
     height: 1.5rem;
+    margin-top: 4px;
     background-color: #f2f2f2;
     border: 0.05rem #c4c4c4 solid;
     border-radius: 0.25rem;
