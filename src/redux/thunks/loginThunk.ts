@@ -4,7 +4,7 @@ import { ILoginForm, LogInPayload } from "../../types/types";
 import { logInActionCreator } from "../features/userSlice";
 import { AppDispatch } from "../store";
 
-interface loginAPIResponse {
+interface loginApiResponse {
   token: string;
 }
 
@@ -13,7 +13,7 @@ const loginThunk =
     const url: string = `${process.env.REACT_APP_API_URL}user/login`;
     const {
       data: { token },
-    } = await axios.post<loginAPIResponse>(url, userCredentials);
+    } = await axios.post<loginApiResponse>(url, userCredentials);
 
     localStorage.setItem("token", token);
 
