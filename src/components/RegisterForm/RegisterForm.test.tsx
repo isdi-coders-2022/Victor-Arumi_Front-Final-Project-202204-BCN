@@ -68,8 +68,8 @@ describe("Given a RegisterForm component", () => {
         </Provider>
       );
 
-      const loginButton = screen.getByRole("button", { name: buttonText });
-      userEvent.click(loginButton);
+      const registerButton = screen.getByRole("button", { name: buttonText });
+      userEvent.click(registerButton);
 
       expect(mockDispatch).toHaveBeenCalled();
     });
