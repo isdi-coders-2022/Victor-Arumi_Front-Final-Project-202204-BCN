@@ -3,6 +3,7 @@ export interface UserSliceState {
   name: string;
   profilePicture: string;
   logged: boolean;
+  id?: string;
 }
 
 export interface RegisterPayload {
@@ -10,6 +11,7 @@ export interface RegisterPayload {
 }
 
 export interface LogInPayload {
+  id: string;
   username: string;
   name: string;
   profilePicture: string;

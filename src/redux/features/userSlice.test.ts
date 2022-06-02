@@ -34,15 +34,18 @@ describe("Given a userSlice reducer", () => {
 
   describe("When it receives an initial state and a login action with valid user credentials", () => {
     test("Then it should return the new state with the username, name and profilepicture url of the user", () => {
+      const loggedId = "tysonid";
       const loggedUserName = "Tyson";
       const loggedUserProfilePicture = "MikeTyson.jpg";
       const payload = {
+        id: loggedId,
         username: inputUsername,
         name: loggedUserName,
         profilePicture: loggedUserProfilePicture,
       };
 
       const expectedNewUser = {
+        id: loggedId,
         username: inputUsername,
         name: loggedUserName,
         profilePicture: loggedUserProfilePicture,
