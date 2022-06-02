@@ -10,6 +10,7 @@ afterEach(() => server.resetHandlers);
 afterAll(() => server.close);
 
 jest.mock("jwt-decode", () => () => ({
+  id: "id",
   username: "Gerard",
   name: "Pique",
   profilePicture: "Bernabeu",
@@ -21,6 +22,7 @@ describe("Given a loginThunk", () => {
       const dispatch: Dispatch = jest.fn();
 
       const payload = {
+        id: "id",
         username: "Gerard",
         name: "Pique",
         profilePicture: "Bernabeu",
