@@ -10,7 +10,7 @@ function App() {
   return (
     <>
       <AppStyled>
-        <h1>PadelBookings</h1>
+        <h1 className="text-3xl font-bold underline">PadelBookings</h1>
         <Routes>
           <Route path="/" element={<Navigate to="/clubs" />} />
           <Route path="/clubs" element={<ClubsPage />} />
