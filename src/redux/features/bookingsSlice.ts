@@ -7,12 +7,13 @@ const bookingsSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    getBookings: (bookings, action: PayloadAction<IBooking[]>) => [
+    loadBookings: (bookings, action: PayloadAction<IBooking[]>) => [
       ...action.payload,
     ],
   },
 });
 
-export const { getBookings: getBookingsActionCreator } = bookingsSlice.actions;
+export const { loadBookings: loadBookingsActionCreator } =
+  bookingsSlice.actions;
 
 export default bookingsSlice.reducer;

@@ -21,10 +21,10 @@ function NavBar() {
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
                   <a
-                    href="clubs"
+                    href="bookings"
                     className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
                   >
-                    Clubs
+                    Reservas
                   </a>
                   <a
                     href="login"
@@ -101,10 +101,10 @@ function NavBar() {
             <div className="md:hidden" id="mobile-menu">
               <div ref={buttonRef} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <a
-                  href="clubs"
+                  href="bookings"
                   className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
                 >
-                  Clubs
+                  Reservas
                 </a>
                 <a
                   href="login"

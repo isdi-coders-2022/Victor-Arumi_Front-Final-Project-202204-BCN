@@ -3,7 +3,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import AppStyled from "./AppStyled";
 import NavBar from "./components/NavBar/NavBar";
-import ClubsPage from "./pages/ClubsPage/ClubsPage";
+import BookingsPage from "./pages/BookingsPage/BookingsPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 
@@ -13,8 +13,8 @@ function App() {
       <AppStyled>
         <NavBar />
         <Routes>
-          <Route path="/" element={<Navigate to="/clubs" />} />
-          <Route path="/clubs" element={<ClubsPage />} />
+          <Route path="/" element={<Navigate to="/bookings" />} />
+          <Route path="/bookings" element={<BookingsPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
         </Routes>

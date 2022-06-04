@@ -1,6 +1,6 @@
 import mockBookings from "../../mocks/mockBookings";
 import { IBooking } from "../../types/types";
-import bookingsReducer, { getBookingsActionCreator } from "./bookingsSlice";
+import bookingsReducer, { loadBookingsActionCreator } from "./bookingsSlice";
 
 const initialBookingsState: IBooking[] = [];
 
@@ -11,7 +11,7 @@ describe("Given a bookingsSlice reducer", () => {
 
       const expectedNewBookings = mockBookings;
 
-      const registerAction = getBookingsActionCreator(payload);
+      const registerAction = loadBookingsActionCreator(payload);
       const newBookingsState = bookingsReducer(
         initialBookingsState,
         registerAction
