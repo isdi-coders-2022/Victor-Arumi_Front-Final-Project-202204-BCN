@@ -4,17 +4,17 @@ import { Provider } from "react-redux";
 import store from "../../redux/store";
 
 import { BrowserRouter } from "react-router-dom";
-import ClubsPage from "./ClubsPage";
+import BookingsPage from "./BookingsPage";
 
-describe("Given a ClubsPage component", () => {
+describe("Given a BookingsPage component", () => {
   describe("When it's invoked", () => {
-    test("Then it should render a level 1 heading with text 'Aqui irán los clubs'", () => {
-      const HeadingText = "Aqui irán los clubs";
+    test("Then it should render a level 1 heading with text 'Aqui irán las reservas'", () => {
+      const HeadingText = "Aqui van las reservas";
 
       render(
         <BrowserRouter>
           <Provider store={store}>
-            <ClubsPage />
+            <BookingsPage />
           </Provider>
         </BrowserRouter>
       );

@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 
-const ClubsPage = (): JSX.Element => {
+const BookingsPage = (): JSX.Element => {
   return (
     <>
-      <h1>Aqui irán los clubs</h1>
+      <h1>Aqui van las reservas</h1>
       <Link className="" to={"/login"}>
         Iniciar sesión
       </Link>
@@ -11,4 +11,4 @@ const ClubsPage = (): JSX.Element => {
   );
 };
 
-export default ClubsPage;
+export default BookingsPage;
