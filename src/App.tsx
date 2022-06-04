@@ -12,6 +12,7 @@ function App() {
     <>
       <AppStyled>
         <NavBar />
+
         <Routes>
           <Route path="/" element={<Navigate to="/bookings" />} />
           <Route path="/bookings" element={<BookingsPage />} />
