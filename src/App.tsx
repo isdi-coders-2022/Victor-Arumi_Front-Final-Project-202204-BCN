@@ -14,7 +14,6 @@ function App() {
     <>
       <AppStyled>
         <NavBar />
-
         <Routes>
           <Route
             path="/"

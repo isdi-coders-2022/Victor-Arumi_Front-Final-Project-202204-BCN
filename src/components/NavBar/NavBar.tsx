@@ -1,13 +1,14 @@
 import React, { useRef, useState } from "react";
 import { Transition } from "@headlessui/react";
+import NavBarStyled from "./NavBarStyled";
 
 function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
 
   const buttonRef = useRef(null);
   return (
-    <div>
-      <nav className="bg-customblue">
+    <NavBarStyled>
+      <nav className="bg-customblue min-w-350">
         <div className="min-w-350 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
@@ -123,7 +124,7 @@ function NavBar() {
           )}
         </Transition>
       </nav>
-    </div>
+    </NavBarStyled>
   );
 }
 
