@@ -1,7 +1,7 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
-import LoginControl from "./LoginControl";
+import LogoutControl from "./LogoutControl";
 
 const mockUseNavigate = jest.fn();
 
@@ -9,12 +9,12 @@ jest.mock("react-router-dom", () => ({
   useNavigate: () => mockUseNavigate,
 }));
 
-let mockLogged = false;
+let mockLogged = true;
 
 describe("Given a LoginControl component", () => {
-  describe("When it's invoked and logged status is false", () => {
-    test("Then it should call navigate with login page path", () => {
-      const loginPagePath = "/login";
+  describe("When it's invoked and logged status is true", () => {
+    test("Then it should call navigate with bookings page path", () => {
+      const loginPagePath = "/bookings";
       const mockUserSlice = createSlice({
         name: "user",
         initialState: { logged: mockLogged },
@@ -27,9 +27,9 @@ describe("Given a LoginControl component", () => {
 
       render(
         <Provider store={mockStore}>
-          <LoginControl>
+          <LogoutControl>
             <p>Chilren</p>
-          </LoginControl>
+          </LogoutControl>
         </Provider>
       );
 
@@ -37,9 +37,9 @@ describe("Given a LoginControl component", () => {
     });
   });
 
-  describe("When it's invoked and logged status is true", () => {
+  describe("When it's invoked and logged status is false", () => {
     test("Then it should render a level 1 heading with text 'Children'", () => {
-      mockLogged = true;
+      mockLogged = false;
       const mockUserSlice = createSlice({
         name: "user",
         initialState: { logged: mockLogged },
@@ -52,9 +52,9 @@ describe("Given a LoginControl component", () => {
 
       render(
         <Provider store={mockStore}>
-          <LoginControl>
+          <LogoutControl>
             <h1>Children</h1>
-          </LoginControl>
+          </LogoutControl>
         </Provider>
       );
 
