@@ -6,6 +6,7 @@ const FormStyled = styled.div`
   align-items: center;
   justify-content: center;
   background-color: #fff;
+  margin-top: 1.5rem;
 
   .register-form {
     display: flex;
@@ -15,7 +16,7 @@ const FormStyled = styled.div`
   }
 
   label {
-    width: 200px;
+    width: 12rem;
     margin-bottom: 10px;
     background-color: #fff;
     text-align: left;
@@ -36,6 +37,7 @@ const FormStyled = styled.div`
   }
   .submit-button {
     margin-top: 1rem;
+    margin-bottom: 1rem;
     width: 10rem;
     height: 3rem;
     background-color: #1974b6;

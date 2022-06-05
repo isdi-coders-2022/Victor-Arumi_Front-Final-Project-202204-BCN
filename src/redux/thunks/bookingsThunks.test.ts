@@ -2,7 +2,7 @@ import { server } from "../../mocks/server";
 import { Dispatch } from "@reduxjs/toolkit";
 import mockBookings from "../../mocks/mockBookings";
 import { loadBookingsActionCreator } from "../features/bookingsSlice";
-import loadBookingsThunk from "./loadBookingsThunk";
+import loadBookingsThunk from "./bookingsThunks";
 
 beforeEach(() => server.listen());
 afterEach(() => server.resetHandlers);
