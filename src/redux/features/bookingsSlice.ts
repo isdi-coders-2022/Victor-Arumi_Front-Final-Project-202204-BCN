@@ -4,7 +4,7 @@ import { IBooking } from "../../types/types";
 const initialState: IBooking[] = [];
 
 const bookingsSlice = createSlice({
-  name: "user",
+  name: "bookings",
   initialState,
   reducers: {
     loadBookings: (bookings, action: PayloadAction<IBooking[]>) => [
