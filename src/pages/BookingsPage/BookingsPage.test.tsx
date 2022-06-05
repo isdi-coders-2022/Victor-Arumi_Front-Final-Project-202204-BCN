@@ -8,8 +8,8 @@ import BookingsPage from "./BookingsPage";
 
 describe("Given a BookingsPage component", () => {
   describe("When it's invoked", () => {
-    test("Then it should render a level 2 heading with text 'Aqui irán las reservas'", () => {
-      const HeadingText = "Aqui van las reservas";
+    test("Then it should render a level 2 heading with text 'Reservas'", () => {
+      const HeadingText = "Reservas";
 
       render(
         <BrowserRouter>

@@ -1,34 +1,43 @@
 import styled from "styled-components";
 
 const BookingStyled = styled.div`
-  width: 350px;
-  height: 250px;
+  width: 345px;
+  height: 235px;
   background-color: white;
   border-radius: 15px;
   display: flex;
-  border: 10px solid red;
   color: #1974b6;
+  margin-bottom: 20px;
 
   .booking-info-container {
     display: flex;
     flex-direction: column;
     margin: 5px 0px 5px 50px;
-    border: 2px solid blue;
     width: 250px;
-    padding: 5px 0px;
+    padding-top: 5px;
   }
 
   .data-container {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-left: 30px;
+    margin-left: 22px;
+    margin-bottom: 10px;
     height: 100%;
-    justify-content: space-around;
+    justify-content: flex-end;
+    font-size: 1.2rem;
 
     &_item {
       display: flex;
       align-items: left;
+      margin-top: 5px;
+
+      span {
+        display: flex;
+        align-items: center;
+        width: 25px;
+        justify-content: space-around;
+      }
 
       p {
         margin-left: 5px;
@@ -37,23 +46,26 @@ const BookingStyled = styled.div`
   }
   .club-container {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    margin-left: 22px;
     align-items: center;
-    height: 50px;
+    height: 100px;
 
     h3 {
       color: black;
-      margin-left: 5px;
+      font-size: 2rem;
+      font-weight: bold;
+      margin-right: 5px;
     }
   }
 
   .booking-buttons-container {
     display: flex;
     flex-direction: column;
-    border: 2px solid green;
     width: 50px;
-    margin: 5px 5px;
+    margin: 10px 5px;
     justify-content: space-between;
+    font-size: 2.2rem;
   }
 `;
 
