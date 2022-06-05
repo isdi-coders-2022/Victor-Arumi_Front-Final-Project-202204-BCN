@@ -11,39 +11,46 @@ import {
   faTrash,
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
+import { IBooking } from "../../types/types";
 
-const Booking = (): JSX.Element => {
+interface Props {
+  booking: IBooking;
+}
+
+const Booking = ({
+  booking: { club, date, hour, courtType, open },
+}: Props): JSX.Element => {
   return (
     <BookingStyled>
       <div className="booking-info-container">
         <div className="club-container">
+          <h3>{club}</h3>
           <span>logo</span>
-          <h3>nombre del club</h3>
         </div>
         <div className="data-container">
           <div className="data-container_item">
             <span>
               <FontAwesomeIcon icon={faCalendar} />
             </span>
-            <p>22/10/2022</p>
+            <p>{date}</p>
           </div>
           <div className="data-container_item">
             <span>
               <FontAwesomeIcon icon={faClock} />
             </span>
-            <p>18:00 a 19:00 h</p>
+            <p>{hour}</p>
           </div>
           <div className="data-container_item">
             <span>
               <FontAwesomeIcon icon={faHome} />
             </span>
-            <p>Indoor</p>
+            <p>{courtType}</p>
           </div>
           <div className="data-container_item">
             <span>
               <FontAwesomeIcon icon={faLock} />
             </span>
-            <p>Reserva cerrada</p>
+            <p>{`${open ? "Reserva abierta" : "Reserva cerrada"}`}</p>
           </div>
         </div>
       </div>

@@ -16,6 +16,10 @@ export interface IBooking {
   open: boolean;
 }
 
+export interface IBookingsList {
+  bookings: IBooking[];
+}
+
 export interface UserSliceState {
   username: string;
   name: string;
