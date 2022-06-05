@@ -1,7 +1,7 @@
 import axios from "axios";
-import { IBooking } from "../../types/types";
-import { loadBookingsActionCreator } from "../features/bookingsSlice";
-import { AppDispatch } from "../store";
+import { IBooking } from "../../../types/types";
+import { loadBookingsActionCreator } from "../../features/bookingsSlice";
+import { AppDispatch } from "../../store";
 
 interface AxiosGetBookingsResponse {
   bookings: IBooking[];
