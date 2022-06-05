@@ -3,6 +3,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import AppStyled from "./AppStyled";
 import LoginControl from "./components/LoginControl/LoginControl";
+import LogoutControl from "./components/LogoutControl/LogoutControl";
 import NavBar from "./components/NavBar/NavBar";
 import BookingsPage from "./pages/BookingsPage/BookingsPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
@@ -31,8 +32,22 @@ function App() {
               </LoginControl>
             }
           />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
+          <Route
+            path="/login"
+            element={
+              <LogoutControl>
+                <LoginPage />
+              </LogoutControl>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <LogoutControl>
+                <RegisterPage />
+              </LogoutControl>
+            }
+          />
         </Routes>
       </AppStyled>
     </>
