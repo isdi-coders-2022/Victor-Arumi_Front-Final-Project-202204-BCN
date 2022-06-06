@@ -2,9 +2,9 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import RegisterForm from "./RegisterForm";
-
-import { Provider } from "react-redux";
+import { MemoryRouter as Router } from "react-router-dom";
 import store from "../../redux/store";
+import { Provider } from "react-redux";
 
 const mockDispatch = jest.fn();
 
@@ -21,7 +21,9 @@ describe("Given a RegisterForm component", () => {
 
     render(
       <Provider store={store}>
-        <RegisterForm />
+        <Router>
+          <RegisterForm />
+        </Router>
       </Provider>
     );
     const input: HTMLInputElement = screen.getByRole("textbox", {
@@ -42,7 +44,9 @@ describe("Given a RegisterForm component", () => {
 
       render(
         <Provider store={store}>
-          <RegisterForm />
+          <Router>
+            <RegisterForm />
+          </Router>
         </Provider>
       );
 
@@ -72,7 +76,9 @@ describe("Given a RegisterForm component", () => {
 
       render(
         <Provider store={store}>
-          <RegisterForm />
+          <Router>
+            <RegisterForm />
+          </Router>
         </Provider>
       );
 
