@@ -53,12 +53,12 @@ describe("Given a LoginControl component", () => {
       render(
         <Provider store={mockStore}>
           <LogoutControl>
-            <p>Children</p>
+            <h1>Children</h1>
           </LogoutControl>
         </Provider>
       );
 
-      const childrenText = screen.getByRole("paragraph", { name: "Children" });
+      const childrenText = screen.getByRole("heading", { name: "Children" });
 
       expect(childrenText).toBeInTheDocument();
     });
