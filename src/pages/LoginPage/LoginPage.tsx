@@ -5,8 +5,8 @@ const LoginPage = (): JSX.Element => {
   return (
     <>
       <LoginForm />
-      <p>Si no tienes una cuenta</p>
-      <Link className="" to={"/register"}>
+      <p className="text-center">Si no tienes una cuenta</p>
+      <Link className="text-center" to={"/register"}>
         Regístrate
       </Link>
     </>
