@@ -1,10 +1,12 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import FormStyled from "./FormStyled";
 import "@fontsource/urbanist";
 
 import { IRegisterForm } from "../../types/types";
 import registerThunk from "../../redux/thunks/registerThunk";
-import { useAppDispatch } from "../../redux/store/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const RegisterForm = (): JSX.Element => {
   const emptyFormValues: IRegisterForm = {
@@ -13,7 +15,7 @@ const RegisterForm = (): JSX.Element => {
     name: "",
     profilePicture: "",
   };
-
+  const { username } = useAppSelector((state) => state.user);
   const [formData, setFormData] = useState<IRegisterForm>(emptyFormValues);
 
   const changeData = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -27,7 +29,7 @@ const RegisterForm = (): JSX.Element => {
   };
 
   const dispatch = useAppDispatch();
-
+  const navigate = useNavigate();
   const registerSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
 
@@ -41,6 +43,15 @@ const RegisterForm = (): JSX.Element => {
     dispatch(registerThunk(newFormData));
     setFormData(emptyFormValues);
   };
+
+  useEffect(() => {
+    if (username) {
+      navigate("/login");
+      toast.success(
+        `Creada nueva cuenta con usuario ${username}, ya puedes iniciar sesión`
+      );
+    }
+  }, [navigate, username]);
 
   return (
     <FormStyled>
