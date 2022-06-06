@@ -42,7 +42,7 @@ describe("Given a NavBar component", () => {
     expect(totalLinks).toHaveLength(expectedLinks);
   });
 
-  describe.skip("When it's invoked and state has logged:true", () => {
+  describe("When it's invoked and state has logged:true", () => {
     test("Then a link with name 'Reservas' a clickable text 'Cerrar sesión' should be rendered", () => {});
     mockLogged = true;
     const mockUserSlice = createSlice({
