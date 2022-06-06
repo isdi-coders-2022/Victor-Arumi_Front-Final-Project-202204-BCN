@@ -24,10 +24,19 @@ const userSlice = createSlice({
       ...action.payload,
       logged: true,
     }),
+    logOut: () => ({
+      username: "",
+      name: "",
+      profilePicture: "",
+      logged: localStorage.getItem("token") ? true : false,
+    }),
   },
 });
 
-export const { register: registerActionCreator, logIn: logInActionCreator } =
-  userSlice.actions;
+export const {
+  register: registerActionCreator,
+  logIn: logInActionCreator,
+  logOut: logOutActionCreator,
+} = userSlice.actions;
 
 export default userSlice.reducer;
