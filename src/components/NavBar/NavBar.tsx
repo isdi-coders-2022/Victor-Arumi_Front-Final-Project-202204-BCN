@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { Transition } from "@headlessui/react";
 import NavBarStyled from "./NavBarStyled";
 import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
@@ -22,7 +22,6 @@ function NavBar() {
     toast.success("Sesión cerrada, vuelve pronto!");
   };
 
-  const buttonRef = useRef(null);
   return (
     <NavBarStyled>
       <nav className="bg-customblue min-w-350">
@@ -136,7 +135,7 @@ function NavBar() {
         >
           {() => (
             <div className="md:hidden" id="mobile-menu">
-              <div ref={buttonRef} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+              <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 {logged && (
                   <span onClick={closeNavBar}>
                     <Link
