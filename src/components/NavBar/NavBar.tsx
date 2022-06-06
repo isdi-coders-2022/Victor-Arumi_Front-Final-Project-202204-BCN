@@ -1,11 +1,27 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { Transition } from "@headlessui/react";
 import NavBarStyled from "./NavBarStyled";
+import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
+import { logOutActionCreator } from "../../redux/features/userSlice";
+import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 function NavBar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const { logged } = useAppSelector((state) => state.user);
 
-  const buttonRef = useRef(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useAppDispatch();
+
+  const closeNavBar = () => setIsOpen(false);
+
+  const logOut = (event: any) => {
+    event.preventDefault();
+    localStorage.removeItem("token");
+    dispatch(logOutActionCreator());
+    setIsOpen(!isOpen);
+    toast.success("Sesión cerrada, vuelve pronto!");
+  };
+
   return (
     <NavBarStyled>
       <nav className="bg-customblue min-w-350">
@@ -21,24 +37,43 @@ function NavBar() {
               </div>
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
-                  <a
-                    href="bookings"
-                    className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
-                  >
-                    Reservas
-                  </a>
-                  <a
-                    href="login"
-                    className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
-                  >
-                    Inicia Sesión
-                  </a>
-                  <a
-                    href="register"
-                    className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
-                  >
-                    Crear cuenta
-                  </a>
+                  {logged && (
+                    <span>
+                      <Link
+                        to={"/bookings"}
+                        className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
+                      >
+                        Reservas
+                      </Link>
+                    </span>
+                  )}
+                  {logged ? (
+                    <p
+                      onClick={logOut}
+                      className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
+                    >
+                      Cerrar sesión
+                    </p>
+                  ) : (
+                    <>
+                      <span>
+                        <Link
+                          to={"/login"}
+                          className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
+                        >
+                          Iniciar sesión
+                        </Link>
+                      </span>
+                      <span>
+                        <Link
+                          to={"/register"}
+                          className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
+                        >
+                          Crear cuenta
+                        </Link>
+                      </span>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
@@ -100,25 +135,44 @@ function NavBar() {
         >
           {() => (
             <div className="md:hidden" id="mobile-menu">
-              <div ref={buttonRef} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a
-                  href="bookings"
-                  className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Reservas
-                </a>
-                <a
-                  href="login"
-                  className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Inicia Sesión
-                </a>
-                <a
-                  href="register"
-                  className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Crear cuenta
-                </a>
+              <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                {logged && (
+                  <span onClick={closeNavBar}>
+                    <Link
+                      to={"/bookings"}
+                      className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
+                    >
+                      Reservas
+                    </Link>
+                  </span>
+                )}
+                {logged ? (
+                  <p
+                    onClick={logOut}
+                    className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
+                  >
+                    Cerrar sesión
+                  </p>
+                ) : (
+                  <>
+                    <span onClick={closeNavBar}>
+                      <Link
+                        to={"/login"}
+                        className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
+                      >
+                        Iniciar sesión
+                      </Link>
+                    </span>
+                    <span onClick={closeNavBar}>
+                      <Link
+                        to={"/register"}
+                        className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
+                      >
+                        Crear cuenta
+                      </Link>
+                    </span>
+                  </>
+                )}
               </div>
             </div>
           )}

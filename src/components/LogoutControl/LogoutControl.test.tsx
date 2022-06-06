@@ -28,7 +28,7 @@ describe("Given a LoginControl component", () => {
       render(
         <Provider store={mockStore}>
           <LogoutControl>
-            <p>Chilren</p>
+            <p>Children</p>
           </LogoutControl>
         </Provider>
       );
