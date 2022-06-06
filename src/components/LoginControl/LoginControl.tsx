@@ -6,7 +6,7 @@ interface Props {
   children: JSX.Element;
 }
 
-const LoginControl = ({ children }: Props) => {
+const LoginControl = ({ children }: Props): JSX.Element | null => {
   const { logged } = useAppSelector((state) => state.user);
 
   const navigate = useNavigate();
