@@ -11,19 +11,31 @@ interface AxiosGetBookingsResponse {
   bookings: IBooking[];
 }
 
+const getAuthData = () => {
+  const token = localStorage.getItem("token");
+  const headerWithLocalToken = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  return headerWithLocalToken;
+};
+
 export const loadBookingsThunk = () => async (dispatch: AppDispatch) => {
   const url: string = `${process.env.REACT_APP_API_URL}bookings`;
+
   const id = toast.loading("Cargando...", {
     isLoading: true,
     position: "top-center",
   });
+
   const {
     data: { bookings },
-  } = await axios.get<AxiosGetBookingsResponse>(url);
+  } = await axios.get<AxiosGetBookingsResponse>(url, getAuthData());
+
   dispatch(loadBookingsActionCreator(bookings));
+
   toast.update(id, {
     isLoading: false,
-    autoClose: 300,
+    autoClose: 400,
   });
 };
 
@@ -34,7 +46,7 @@ export const deleteBookingThunk =
       const {
         status,
         data: { msg },
-      } = await axios.delete(url);
+      } = await axios.delete(url, getAuthData());
 
       if (status === 200) {
         dispatch(deleteBookingActionCreator(bookingIdToDelete));
