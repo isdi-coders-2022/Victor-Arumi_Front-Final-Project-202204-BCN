@@ -1,6 +1,9 @@
 import mockBookings from "../../mocks/mockBookings";
 import { IBooking } from "../../types/types";
-import bookingsReducer, { loadBookingsActionCreator } from "./bookingsSlice";
+import bookingsReducer, {
+  deleteBookingActionCreator,
+  loadBookingsActionCreator,
+} from "./bookingsSlice";
 
 const initialBookingsState: IBooking[] = [];
 
@@ -11,10 +14,26 @@ describe("Given a bookingsSlice reducer", () => {
 
       const expectedNewBookings = mockBookings;
 
-      const registerAction = loadBookingsActionCreator(payload);
+      const loadBookingsAction = loadBookingsActionCreator(payload);
       const newBookingsState = bookingsReducer(
         initialBookingsState,
-        registerAction
+        loadBookingsAction
+      );
+
+      expect(newBookingsState).toEqual(expectedNewBookings);
+    });
+  });
+
+  describe("When it receives an initial state and a deleteBooking action", () => {
+    test("Then it should return the new state with a list of bookings", () => {
+      const payload = mockBookings[1].id;
+
+      const expectedNewBookings = [mockBookings[0]];
+
+      const deleteBookingAction = deleteBookingActionCreator(payload);
+      const newBookingsState = bookingsReducer(
+        mockBookings,
+        deleteBookingAction
       );
 
       expect(newBookingsState).toEqual(expectedNewBookings);
