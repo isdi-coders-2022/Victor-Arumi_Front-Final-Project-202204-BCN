@@ -24,8 +24,8 @@ describe("Given a bookingsSlice reducer", () => {
     });
   });
 
-  describe("When it receives an initial state and a deleteBooking action", () => {
-    test("Then it should return the new state with a list of bookings", () => {
+  describe("When it receives an initial state and a deleteBooking action with an existing booking id", () => {
+    test("Then it should return the new state with a list of bookings without the booking of the id provided", () => {
       const payload = mockBookings[1].id;
 
       const expectedNewBookings = [mockBookings[0]];

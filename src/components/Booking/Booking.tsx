@@ -12,14 +12,21 @@ import {
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { IBooking } from "../../types/types";
+import { useAppDispatch } from "../../redux/store/hooks";
+import { deleteBookingThunk } from "../../redux/thunks/bookingsThunks/bookingsThunks";
 
 interface Props {
   booking: IBooking;
 }
 
 const Booking = ({
-  booking: { club, date, hour, courtType, open },
+  booking: { club, date, hour, courtType, open, id },
 }: Props): JSX.Element => {
+  const dispatch = useAppDispatch();
+  const deleteBooking = () => {
+    dispatch(deleteBookingThunk(id));
+  };
+
   return (
     <BookingStyled>
       <div className="booking-info-container">
@@ -62,7 +69,7 @@ const Booking = ({
         <button>
           <FontAwesomeIcon icon={faUserPlus} />
         </button>
-        <button>
+        <button onClick={deleteBooking}>
           <FontAwesomeIcon icon={faTrash} />
         </button>
       </div>

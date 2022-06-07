@@ -3,7 +3,7 @@ import mockBookings from "../../../mocks/mockBookings";
 import { server } from "../../../mocks/server";
 import { loadBookingsActionCreator } from "../../features/bookingsSlice";
 
-import loadBookingsThunk from "./bookingsThunks";
+import { loadBookingsThunk } from "./bookingsThunks";
 
 beforeEach(() => server.listen());
 afterEach(() => server.resetHandlers);

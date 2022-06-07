@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import BookingsList from "../../components/BookingsList/BookingsList";
 import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
-import loadBookingsThunk from "../../redux/thunks/bookingsThunks/bookingsThunks";
+import { loadBookingsThunk } from "../../redux/thunks/bookingsThunks/bookingsThunks";
 
 const BookingsPage = (): JSX.Element => {
   const dispatch = useAppDispatch();
