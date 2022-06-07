@@ -7,6 +7,7 @@ export interface UserSliceState {
 }
 
 export interface IBooking {
+  id: string;
   club: string;
   owner: string;
   date: string;
