@@ -21,8 +21,9 @@ const getAuthData = () => {
 export const loadBookingsThunk = () => async (dispatch: AppDispatch) => {
   const url: string = `${process.env.REACT_APP_API_URL}bookings`;
 
-  const id = toast.loading("Cargando...", {
+  const loadToastId = toast.loading("Cargando contenido...", {
     isLoading: true,
+    type: "default",
     position: "top-center",
   });
 
@@ -32,9 +33,10 @@ export const loadBookingsThunk = () => async (dispatch: AppDispatch) => {
 
   dispatch(loadBookingsActionCreator(bookings));
 
-  toast.update(id, {
+  toast.update(loadToastId, {
+    type: toast.TYPE.DEFAULT,
     isLoading: false,
-    autoClose: 400,
+    autoClose: 50,
   });
 };
 

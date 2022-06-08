@@ -12,6 +12,11 @@ interface LoginApiResponse {
 const loginThunk =
   (userCredentials: ILoginForm) => async (dispatch: AppDispatch) => {
     const url: string = `${process.env.REACT_APP_API_URL}user/login`;
+    const loginToastId = toast.loading("Iniciando sesión...", {
+      type: "default",
+      isLoading: true,
+      position: "top-center",
+    });
 
     try {
       const {
@@ -22,9 +27,19 @@ const loginThunk =
 
       const userDetails: LogInPayload = await jwtDecode(token);
       dispatch(logInActionCreator(userDetails));
-      toast.success(`!Bienvenido ${userDetails.username}!`);
+      toast.update(loginToastId, {
+        render: `!Bienvenido ${userDetails.username}!`,
+        type: "success",
+        isLoading: false,
+        autoClose: 800,
+      });
     } catch (error: any) {
-      toast.error(`Algo ha salido mal: ${error.response.data.msg}`);
+      toast.update(loginToastId, {
+        render: `Algo ha salido mal: ${error.response.data.msg}`,
+        type: "error",
+        isLoading: false,
+        autoClose: 800,
+      });
     }
   };
 

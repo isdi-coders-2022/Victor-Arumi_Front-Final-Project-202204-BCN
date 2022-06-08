@@ -6,7 +6,6 @@ import { IRegisterForm } from "../../types/types";
 import registerThunk from "../../redux/thunks/registerThunk";
 import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 
 const RegisterForm = (): JSX.Element => {
   const emptyFormValues: IRegisterForm = {
@@ -47,9 +46,6 @@ const RegisterForm = (): JSX.Element => {
   useEffect(() => {
     if (username) {
       navigate("/login");
-      toast.success(
-        `Creada nueva cuenta con usuario ${username}, ya puedes iniciar sesión`
-      );
     }
   }, [navigate, username]);
 
