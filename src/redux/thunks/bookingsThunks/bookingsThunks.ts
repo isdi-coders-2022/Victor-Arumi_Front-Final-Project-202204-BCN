@@ -13,10 +13,9 @@ interface AxiosGetBookingsResponse {
 
 const getAuthData = () => {
   const token = localStorage.getItem("token");
-  const headerWithLocalToken = {
+  return {
     headers: { Authorization: `Bearer ${token}` },
   };
-  return headerWithLocalToken;
 };
 
 export const loadBookingsThunk = () => async (dispatch: AppDispatch) => {
