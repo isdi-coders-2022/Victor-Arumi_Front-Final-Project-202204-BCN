@@ -10,6 +10,11 @@ interface RegisterApiResponse {
 
 const registerThunk =
   (userData: FormData | IRegisterForm) => async (dispatch: AppDispatch) => {
+    const registerToastId = toast.loading("Creando cuenta...", {
+      type: "default",
+      isLoading: true,
+      position: "top-center",
+    });
     const url: string = `${process.env.REACT_APP_API_URL}user/register`;
     try {
       const {
@@ -17,8 +22,19 @@ const registerThunk =
       } = await axios.post<RegisterApiResponse>(url, userData);
 
       dispatch(registerActionCreator({ username }));
+      toast.update(registerToastId, {
+        render: `Creada nueva cuenta con usuario ${username}, ya puedes iniciar sesión`,
+        type: "success",
+        isLoading: false,
+        autoClose: 800,
+      });
     } catch (error: any) {
-      toast.error(`Error en el registro: ${error.response.data.msg}`);
+      toast.update(registerToastId, {
+        render: `Error en el registro: ${error.response.data.msg}`,
+        type: "error",
+        isLoading: false,
+        autoClose: 1000,
+      });
     }
   };
 
