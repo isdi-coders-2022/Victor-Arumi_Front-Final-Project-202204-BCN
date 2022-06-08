@@ -1,13 +1,13 @@
 import { IBooking } from "../../types/types";
 import Booking from "../Booking/Booking";
-import BookingsListSyled from "./BookingsListStyled";
+import BookingsListStyled from "./BookingsListStyled";
 
 interface Props {
   bookings: IBooking[];
 }
 const BookingsList = ({ bookings }: Props) => {
   return (
-    <BookingsListSyled>
+    <BookingsListStyled>
       {bookings.map((booking, position) => {
         return (
           <li key={position}>
@@ -15,7 +15,7 @@ const BookingsList = ({ bookings }: Props) => {
           </li>
         );
       })}
-    </BookingsListSyled>
+    </BookingsListStyled>
   );
 };
 
