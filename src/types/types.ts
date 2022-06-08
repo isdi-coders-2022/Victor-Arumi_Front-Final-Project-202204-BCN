@@ -27,6 +27,7 @@ export interface UserSliceState {
   profilePicture: string;
   logged: boolean;
   id?: string;
+  iat?: number;
 }
 
 export interface RegisterPayload {
