@@ -21,7 +21,7 @@ const BookingStyled = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-left: 22px;
+    margin-left: 10px;
     margin-bottom: 10px;
     height: 100%;
     justify-content: flex-end;
@@ -47,7 +47,7 @@ const BookingStyled = styled.div`
   .club-container {
     display: flex;
     justify-content: flex-start;
-    margin-left: 22px;
+    margin-left: 10px;
     align-items: center;
     height: 100px;
 
@@ -63,7 +63,7 @@ const BookingStyled = styled.div`
     display: flex;
     flex-direction: column;
     width: 50px;
-    margin: 10px 5px;
+    margin: 10px 10px;
     justify-content: space-between;
     font-size: 2.2rem;
   }
