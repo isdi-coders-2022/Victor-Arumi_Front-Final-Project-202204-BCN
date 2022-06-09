@@ -52,3 +52,27 @@ export interface ILoginForm {
   username: string;
   password: string;
 }
+
+export interface ICreateBookingForm {
+  club: string;
+  owner: string;
+  date: string;
+  hour: string;
+  courtType: string;
+  players: string[];
+  open: boolean;
+  player1: string;
+  player2: string;
+  player3: string;
+  player4: string;
+}
+
+export interface ICreateSubmittedBooking {
+  club: string;
+  owner: string;
+  date: string;
+  hour: string;
+  courtType: string;
+  players: string[];
+  open: boolean;
+}
