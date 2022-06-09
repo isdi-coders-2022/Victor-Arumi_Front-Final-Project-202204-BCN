@@ -1,7 +1,8 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-import { IBooking } from "../../../types/types";
+import { IBooking, ICreateSubmittedBooking } from "../../../types/types";
 import {
+  createBookingActionCreator,
   deleteBookingActionCreator,
   loadBookingsActionCreator,
 } from "../../features/bookingsSlice";
@@ -9,6 +10,9 @@ import { AppDispatch } from "../../store";
 
 interface AxiosGetBookingsResponse {
   bookings: IBooking[];
+}
+interface AxiosCreateBookingResponse {
+  createdBooking: IBooking;
 }
 
 const getAuthData = () => {
@@ -25,6 +29,7 @@ export const loadBookingsThunk = () => async (dispatch: AppDispatch) => {
     isLoading: true,
     type: "default",
     position: "top-center",
+    closeOnClick: true,
   });
 
   const {
@@ -59,5 +64,40 @@ export const deleteBookingThunk =
       }
     } catch (error: any) {
       toast.error(error.message);
+    }
+  };
+
+export const createBookingThunk =
+  (submittedNewBookingData: ICreateSubmittedBooking) =>
+  async (dispatch: AppDispatch) => {
+    const registerToastId = toast.loading("Creando reserva...", {
+      type: "default",
+      isLoading: true,
+      position: "top-center",
+    });
+    const url: string = `${process.env.REACT_APP_API_URL}bookings/create`;
+    try {
+      const {
+        data: { createdBooking },
+      } = await axios.post<AxiosCreateBookingResponse>(
+        url,
+        submittedNewBookingData,
+        getAuthData()
+      );
+
+      dispatch(createBookingActionCreator(createdBooking));
+      toast.update(registerToastId, {
+        render: `Reserva creada con éxito`,
+        type: "success",
+        isLoading: false,
+        autoClose: 800,
+      });
+    } catch (error: any) {
+      toast.update(registerToastId, {
+        render: `Error al crear reserva: ${error.response.data.msg}`,
+        type: "error",
+        isLoading: false,
+        autoClose: 1000,
+      });
     }
   };
