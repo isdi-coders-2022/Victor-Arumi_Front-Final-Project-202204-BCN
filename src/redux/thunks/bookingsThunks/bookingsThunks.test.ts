@@ -7,7 +7,11 @@ import {
   loadBookingsActionCreator,
 } from "../../features/bookingsSlice";
 
-import { deleteBookingThunk, loadBookingsThunk } from "./bookingsThunks";
+import {
+  createBookingThunk,
+  deleteBookingThunk,
+  loadBookingsThunk,
+} from "./bookingsThunks";
 
 beforeEach(() => server.listen());
 afterEach(() => server.resetHandlers);
@@ -49,6 +53,26 @@ describe("Given a deleteBookingThunk", () => {
       await thunk(dispatch);
 
       expect(dispatch).toHaveBeenCalledWith(deleteBookingAction);
+    });
+  });
+});
+
+describe("Given a CreateBookingThunk", () => {
+  describe("When it is called with a valid bookingFormData", () => {
+    test("Then it should call dispatch with a createBooking action", async () => {
+      const dispatch: Dispatch = jest.fn();
+
+      const createdBooking = mockBookings[0];
+
+      axios.post = jest.fn().mockResolvedValue({
+        data: { createdBookings: createdBooking },
+      });
+
+      const thunk = createBookingThunk(createdBooking);
+
+      await thunk(dispatch);
+
+      expect(dispatch).toHaveBeenCalled();
     });
   });
 });

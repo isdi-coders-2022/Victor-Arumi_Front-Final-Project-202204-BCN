@@ -5,7 +5,7 @@ const mockBookings = [
     date: "25/10/2022",
     hour: "17",
     courtType: "Outdoor",
-    players: [],
+    players: ["6299261c885d2211475ec5ec"],
     open: false,
     id: "629a19fe5a16e50d33d55cb3",
   },

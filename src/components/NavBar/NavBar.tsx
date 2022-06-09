@@ -38,14 +38,24 @@ function NavBar() {
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
                   {logged && (
-                    <span>
-                      <Link
-                        to={"/bookings"}
-                        className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
-                      >
-                        Reservas
-                      </Link>
-                    </span>
+                    <>
+                      <span>
+                        <Link
+                          to={"/bookings"}
+                          className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
+                        >
+                          Reservas
+                        </Link>
+                      </span>
+                      <span>
+                        <Link
+                          to={"/bookings/create"}
+                          className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
+                        >
+                          Nueva reserva
+                        </Link>
+                      </span>
+                    </>
                   )}
                   {logged ? (
                     <p
@@ -137,14 +147,24 @@ function NavBar() {
             <div className="md:hidden" id="mobile-menu">
               <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 {logged && (
-                  <span onClick={closeNavBar}>
-                    <Link
-                      to={"/bookings"}
-                      className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
-                    >
-                      Reservas
-                    </Link>
-                  </span>
+                  <>
+                    <span onClick={closeNavBar}>
+                      <Link
+                        to={"/bookings"}
+                        className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
+                      >
+                        Reservas
+                      </Link>
+                    </span>
+                    <span onClick={closeNavBar}>
+                      <Link
+                        to={"/bookings/create"}
+                        className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
+                      >
+                        Nueva reserva
+                      </Link>
+                    </span>
+                  </>
                 )}
                 {logged ? (
                   <p
