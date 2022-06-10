@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
 import mockBookings from "../../mocks/mockBookings";
 import store from "../../redux/store";
 import BookingsList from "./BookingsList";
@@ -11,9 +12,11 @@ describe("Given a BookingsList component", () => {
       const expectedListItems = 2;
 
       render(
-        <Provider store={store}>
-          <BookingsList bookings={bookingsList} />
-        </Provider>
+        <BrowserRouter>
+          <Provider store={store}>
+            <BookingsList bookings={bookingsList} />
+          </Provider>
+        </BrowserRouter>
       );
 
       const totalListItems = screen.getAllByRole("listitem");
