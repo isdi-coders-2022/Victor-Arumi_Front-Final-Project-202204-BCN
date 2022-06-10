@@ -3,7 +3,8 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
 import store from "../../redux/store";
-import CreateBookingForm from "./CreateBookingForm";
+import BookingForm from "./CreateBookingForm";
+import mockBookings from "../../mocks/mockBookings";
 
 const mockDispatch = jest.fn();
 
@@ -20,7 +21,7 @@ describe("Given a CreateBooking component", () => {
 
       render(
         <Provider store={store}>
-          <CreateBookingForm />
+          <BookingForm booking={mockBookings[0]} usernames={[]} />
         </Provider>
       );
 
@@ -35,14 +36,14 @@ describe("Given a CreateBooking component", () => {
 
   describe("When invoked and the user clicks on 'Crear reserva' button", () => {
     test("Then it should call dispatch", () => {
-      const CreateBookingButtonText = "Crear Reserva";
+      const CreateBookingButtonText = "Editar reserva";
 
       const indoorButtonText = "Indoor";
       const outdoorButtonText = "Outdoor";
 
       render(
         <Provider store={store}>
-          <CreateBookingForm />
+          <BookingForm booking={mockBookings[0]} usernames={[]} />
         </Provider>
       );
 
