@@ -14,6 +14,7 @@ import {
 import { IBooking } from "../../types/types";
 import { useAppDispatch } from "../../redux/store/hooks";
 import { deleteBookingThunk } from "../../redux/thunks/bookingsThunks/bookingsThunks";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   booking: IBooking;
@@ -26,6 +27,9 @@ const Booking = ({
   const deleteBooking = () => {
     dispatch(deleteBookingThunk(id));
   };
+
+  const navigate = useNavigate();
+  const goToEditPage = (): void => navigate(`/bookings/editBooking/${id}`);
 
   return (
     <BookingStyled>
@@ -63,7 +67,7 @@ const Booking = ({
       </div>
 
       <div className="booking-buttons-container">
-        <button>
+        <button onClick={goToEditPage}>
           <FontAwesomeIcon icon={faPenToSquare} />
         </button>
         <button>
