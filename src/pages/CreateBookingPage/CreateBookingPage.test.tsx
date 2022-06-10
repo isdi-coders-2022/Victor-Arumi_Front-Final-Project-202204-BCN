@@ -6,10 +6,10 @@ import store from "../../redux/store";
 import { BrowserRouter } from "react-router-dom";
 import CreateBookingPage from "./CreateBookingPage";
 
-describe("Given a BookingsPage component", () => {
+describe("Given a CreateBookingsPage component", () => {
   describe("When it's invoked", () => {
     test("Then it should render a level 2 heading with text 'Crear reserva'", () => {
-      const HeadingText = "Crear reserva";
+      const headingText = "Crear reserva";
 
       render(
         <BrowserRouter>
@@ -21,7 +21,7 @@ describe("Given a BookingsPage component", () => {
 
       const heading: HTMLHeadingElement = screen.getByRole("heading", {
         level: 2,
-        name: HeadingText,
+        name: headingText,
       });
 
       expect(heading).toBeInTheDocument();

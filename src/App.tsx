@@ -7,6 +7,7 @@ import LogoutControl from "./components/LogoutControl/LogoutControl";
 import NavBar from "./components/NavBar/NavBar";
 import BookingsPage from "./pages/BookingsPage/BookingsPage";
 import CreateBookingPage from "./pages/CreateBookingPage/CreateBookingPage";
+import EditBookingPage from "./pages/EditBookingPage/EditBookingPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 
@@ -37,6 +38,14 @@ function App() {
             element={
               <LoginControl>
                 <CreateBookingPage />
+              </LoginControl>
+            }
+          />
+          <Route
+            path="/bookings/editBooking/:id"
+            element={
+              <LoginControl>
+                <EditBookingPage />
               </LoginControl>
             }
           />

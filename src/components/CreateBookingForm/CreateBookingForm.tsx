@@ -1,25 +1,35 @@
 import { ChangeEvent, useState } from "react";
 import "@fontsource/urbanist";
 
-import { ICreateBookingForm } from "../../types/types";
-import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
-import { createBookingThunk } from "../../redux/thunks/bookingsThunks/bookingsThunks";
+import { IBooking, ICreateBookingForm } from "../../types/types";
+import { useAppDispatch } from "../../redux/store/hooks";
+import {
+  createBookingThunk,
+  editBookingThunk,
+} from "../../redux/thunks/bookingsThunks/bookingsThunks";
+interface Props {
+  booking: IBooking;
+  usernames: string[];
+}
 
-const CreateBookingForm = (): JSX.Element => {
-  const { id, username } = useAppSelector((state) => state.user);
+const BookingForm = ({
+  booking: { owner, club, date, hour, courtType, players, open, id: bookingId },
+  usernames,
+}: Props): JSX.Element => {
+  const editMode = bookingId ? true : false;
 
   const initialFormValues: ICreateBookingForm = {
-    owner: id ?? "",
-    club: "",
-    date: "",
-    hour: "",
-    courtType: "Indoor",
-    player1: id ?? "",
-    player2: "",
-    player3: "",
-    player4: "",
-    players: [],
-    open: true,
+    owner: owner,
+    club: club,
+    date: date,
+    hour: hour,
+    courtType: courtType,
+    player1: players[0],
+    player2: players[1],
+    player3: players[2],
+    player4: players[3],
+    players: players,
+    open: open,
   };
 
   const [openBooking, toggleOpenBooking] = useState(true);
@@ -62,7 +72,9 @@ const CreateBookingForm = (): JSX.Element => {
       open: checkIfBookingIsFull() ? false : openBooking,
     };
 
-    dispatch(createBookingThunk(formData));
+    editMode
+      ? dispatch(editBookingThunk(formData, bookingId))
+      : dispatch(createBookingThunk(formData));
     setInputsData(initialFormValues);
   };
 
@@ -85,7 +97,8 @@ const CreateBookingForm = (): JSX.Element => {
             id="club"
             className="bg-customblue/20 mb-2 border border-gray-300 text-black text-sm rounded-lg focus:ring-customblue focus:border-customblue block w-full p-2.5"
           >
-            <option value="RCTB">RCTB-1899</option>
+            <option defaultValue={club}>{club}</option>
+            <option value="RCTB-1899">RCTB-1899</option>
             <option value="Vall Parc">Vall Parc Club Esportiu</option>
             <option value="RCPB">Real Club de Polo BCN</option>
           </select>
@@ -157,7 +170,7 @@ const CreateBookingForm = (): JSX.Element => {
           id="player1"
           className="bg-customblue/20 border border-gray-300 text-black text-sm rounded-lg focus:ring-customblue focus:border-customblue block w-full p-2.5"
         >
-          <option defaultValue={id}>{username} (Creador)</option>
+          <option defaultValue={owner}>{usernames[0]} (Creador)</option>
         </select>
         <label
           htmlFor="player2"
@@ -170,7 +183,8 @@ const CreateBookingForm = (): JSX.Element => {
           id="player2"
           className="bg-customblue/20 border border-gray-300 text-black text-sm rounded-lg focus:ring-customblue focus:border-customblue block w-full p-2.5"
         >
-          <option defaultValue=""></option>
+          <option defaultValue={players[1]}>{usernames[1] ?? ""}</option>
+          {!editMode ?? <option value=""></option>}
           <option value="629e05f4ab6c6e669141df9b">Bautista</option>
           <option value="629e0393ab6c6e669141df98">Arumi</option>
         </select>
@@ -185,7 +199,8 @@ const CreateBookingForm = (): JSX.Element => {
           id="player3"
           className="bg-customblue/20 border border-gray-300 text-black text-sm rounded-lg focus:ring-customblue focus:border-customblue block w-full p-2.5"
         >
-          <option defaultValue=""></option>
+          <option defaultValue={players[2]}>{usernames[2] ?? ""}</option>
+          {!editMode ?? <option value=""></option>}
           <option value="629e05f4ab6c6e669141df9b">Bautista</option>
           <option value="629e0393ab6c6e669141df98">Arumi</option>
         </select>
@@ -200,7 +215,8 @@ const CreateBookingForm = (): JSX.Element => {
           id="player4"
           className="bg-customblue/20 border border-gray-300 text-black text-sm rounded-lg focus:ring-customblue focus:border-customblue block w-full p-2.5"
         >
-          <option defaultValue=""></option>
+          <option defaultValue={players[3]}>{usernames[3] ?? ""}</option>
+          {!editMode ?? <option value=""></option>}
           <option value="629e05f4ab6c6e669141df9b">Bautista</option>
           <option value="629e0393ab6c6e669141df98">Arumi</option>
         </select>
@@ -236,11 +252,11 @@ const CreateBookingForm = (): JSX.Element => {
           type="submit"
           onClick={createBookingSubmit}
         >
-          Crear Reserva
+          {editMode ? "Editar reserva" : "Crear Reserva"}
         </button>
       </form>
     </div>
   );
 };
 
-export default CreateBookingForm;
+export default BookingForm;
