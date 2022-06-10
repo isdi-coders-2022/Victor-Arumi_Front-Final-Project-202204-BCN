@@ -70,7 +70,7 @@ export const deleteBookingThunk =
 export const createBookingThunk =
   (submittedNewBookingData: ICreateSubmittedBooking) =>
   async (dispatch: AppDispatch) => {
-    const registerToastId = toast.loading("Creando reserva...", {
+    const createBookingToastId = toast.loading("Creando reserva...", {
       type: "default",
       isLoading: true,
       position: "top-center",
@@ -86,15 +86,47 @@ export const createBookingThunk =
       );
 
       dispatch(createBookingActionCreator(createdBooking));
-      toast.update(registerToastId, {
+      toast.update(createBookingToastId, {
         render: `Reserva creada con éxito`,
         type: "success",
         isLoading: false,
         autoClose: 800,
       });
     } catch (error: any) {
-      toast.update(registerToastId, {
+      toast.update(createBookingToastId, {
         render: `Error al crear reserva: ${error.response.data.msg}`,
+        type: "error",
+        isLoading: false,
+        autoClose: 1000,
+      });
+    }
+  };
+
+export const editBookingThunk =
+  (submittedUpdatedBookingData: ICreateSubmittedBooking, id: string) =>
+  async (dispatch: AppDispatch) => {
+    const updateToastId = toast.loading("Actualizando reserva...", {
+      type: "default",
+      isLoading: true,
+      position: "top-center",
+    });
+    const url: string = `${process.env.REACT_APP_API_URL}bookings/edit/${id}`;
+    try {
+      await axios.put<AxiosCreateBookingResponse>(
+        url,
+        submittedUpdatedBookingData,
+        getAuthData()
+      );
+
+      toast.update(updateToastId, {
+        render: `Reserva actualizada con éxito`,
+        type: "success",
+        isLoading: false,
+        autoClose: 800,
+      });
+    } catch (error: any) {
+      toast.update(updateToastId, {
+        render: `Error al crear actualizar la reserva: ${error.response.data.msg}`,
         type: "error",
         isLoading: false,
         autoClose: 1000,
