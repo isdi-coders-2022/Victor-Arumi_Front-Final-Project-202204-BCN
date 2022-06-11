@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import BookingForm from "../../components/CreateBookingForm/CreateBookingForm";
+import BookingForm from "../../components/BookingForm/BookingForm";
 import { useAppSelector } from "../../redux/store/hooks";
 
 const EditBookingPage = (): JSX.Element => {
