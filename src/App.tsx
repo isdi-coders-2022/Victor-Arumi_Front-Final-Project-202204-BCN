@@ -1,4 +1,5 @@
-import React from "react";
+import jwtDecode from "jwt-decode";
+import React, { useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import AppStyled from "./AppStyled";
@@ -10,8 +11,21 @@ import CreateBookingPage from "./pages/CreateBookingPage/CreateBookingPage";
 import EditBookingPage from "./pages/EditBookingPage/EditBookingPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
+import { logInActionCreator } from "./redux/features/userSlice";
+import { useAppDispatch } from "./redux/store/hooks";
+import { LogInPayload } from "./types/types";
 
 function App() {
+  const token = localStorage.getItem("token");
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    try {
+      const userDetails: LogInPayload = jwtDecode(token as string);
+      dispatch(logInActionCreator(userDetails));
+    } catch (error) {}
+  }, [dispatch, token]);
+
   return (
     <>
       <AppStyled>
