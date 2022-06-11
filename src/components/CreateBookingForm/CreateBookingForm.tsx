@@ -79,9 +79,11 @@ const BookingForm = ({
       open: checkIfBookingIsFull() ? false : openBooking,
     };
 
-    editMode
-      ? dispatch(editBookingThunk(formData, bookingId))
-      : dispatch(createBookingThunk(formData));
+    if (editMode) {
+      dispatch(editBookingThunk(formData, bookingId));
+      return;
+    }
+    dispatch(createBookingThunk(formData));
     setInputsData(initialFormValues);
   };
 
