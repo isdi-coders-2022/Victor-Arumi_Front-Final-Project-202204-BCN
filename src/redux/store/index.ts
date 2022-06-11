@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+import bookingReducer from "../features/bookingSlice";
 import bookingsReducer from "../features/bookingsSlice";
 import userReducer from "../features/userSlice";
 
@@ -6,6 +7,7 @@ const store = configureStore({
   reducer: {
     user: userReducer,
     bookings: bookingsReducer,
+    booking: bookingReducer,
   },
 });
 

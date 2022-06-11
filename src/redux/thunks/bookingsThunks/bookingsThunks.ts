@@ -1,6 +1,11 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-import { IBooking, ICreateSubmittedBooking } from "../../../types/types";
+import {
+  BookingSliceState,
+  IBooking,
+  ICreateSubmittedBooking,
+} from "../../../types/types";
+import { getBookingAndPlayersActionCreator } from "../../features/bookingSlice";
 import {
   createBookingActionCreator,
   deleteBookingActionCreator,
@@ -11,6 +16,7 @@ import { AppDispatch } from "../../store";
 interface AxiosGetBookingsResponse {
   bookings: IBooking[];
 }
+
 interface AxiosCreateBookingResponse {
   createdBooking: IBooking;
 }
@@ -132,4 +138,31 @@ export const editBookingThunk =
         autoClose: 1000,
       });
     }
+  };
+
+export const getBookingAndPlayersUsernamesThunk =
+  (requestedBookingId: string) => async (dispatch: AppDispatch) => {
+    const url: string = `${process.env.REACT_APP_API_URL}bookings/detail/${requestedBookingId}`;
+
+    const getOneBookingToastId = toast.loading(
+      "Cargando datos de la reserva...",
+      {
+        isLoading: true,
+        type: "default",
+        position: "top-center",
+        closeOnClick: true,
+      }
+    );
+
+    const {
+      data: { booking, playersUsernames },
+    } = await axios.get<BookingSliceState>(url, getAuthData());
+
+    dispatch(getBookingAndPlayersActionCreator({ booking, playersUsernames }));
+
+    toast.update(getOneBookingToastId, {
+      type: toast.TYPE.DEFAULT,
+      isLoading: false,
+      autoClose: 50,
+    });
   };
