@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
 import store from "../../redux/store";
-import BookingForm from "./CreateBookingForm";
+import BookingForm from "./BookingForm";
 import mockBookings from "../../mocks/mockBookings";
 
 const mockDispatch = jest.fn();
