@@ -25,9 +25,29 @@ describe("Given a EditBookingsPage component", () => {
         initialState: mockBookings,
         reducers: {},
       });
+      const mockBookingSlice = createSlice({
+        name: "booking",
+        initialState: {
+          booking: {
+            id: "",
+            owner: "",
+            club: "",
+            date: "",
+            hour: "",
+            courtType: "",
+            players: [],
+            open: true,
+          },
+          playersUsernames: [],
+        },
+        reducers: {},
+      });
 
       const mockStore = configureStore({
-        reducer: { bookings: mockBookingsSlice.reducer },
+        reducer: {
+          bookings: mockBookingsSlice.reducer,
+          booking: mockBookingSlice.reducer,
+        },
       });
 
       render(
