@@ -6,6 +6,11 @@ export interface UserSliceState {
   id?: string;
 }
 
+export interface BookingSliceState {
+  booking: IBooking;
+  playersUsernames: string[];
+}
+
 export interface IBooking {
   id: string;
   club: string;
@@ -19,15 +24,6 @@ export interface IBooking {
 
 export interface IBookingsList {
   bookings: IBooking[];
-}
-
-export interface UserSliceState {
-  username: string;
-  name: string;
-  profilePicture: string;
-  logged: boolean;
-  id?: string;
-  iat?: number;
 }
 
 export interface RegisterPayload {
