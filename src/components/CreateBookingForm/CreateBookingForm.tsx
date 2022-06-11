@@ -38,7 +38,7 @@ const BookingForm = ({
     inputsData.player2 && inputsData.player3 && inputsData.player4;
 
   const [currentCourtType, toggleCourtType] = useState(true);
-  const toggleButtonsClass = "bg-customblue focus:customblue";
+  const toggleButtonsClass = " bg-customblue";
 
   const [inputsData, setInputsData] =
     useState<ICreateBookingForm>(initialFormValues);
@@ -134,25 +134,25 @@ const BookingForm = ({
             <button
               value={inputsData.courtType}
               type="button"
-              className={
-                "rounded-l-3xl my-3 inline-block px-7 py-3 bg-customblue/20 text-white font-medium text-sm leading-snug uppercase hover:bg-blue-700 focus:bg-customblue focus:outline-none focus:ring-0 transition duration-150 ease-in-out" +
-                (currentCourtType ? toggleButtonsClass : null)
-              }
               onClick={() => {
                 toggleCourtType(!currentCourtType);
               }}
+              className={
+                "rounded-l-3xl my-3 inline-block px-7 py-3 text-white font-medium text-sm leading-snug uppercase hover:bg-blue-700 focus:bg-customblue focus:outline-none focus:ring-0 transition duration-150 ease-in-out" +
+                (currentCourtType ? toggleButtonsClass : " bg-customblue/20")
+              }
             >
               Indoor
             </button>
             <button
               type="button"
-              className={
-                "rounded-r-3xl my-3 inline-block px-7 py-3 bg-customblue/20 text-white font-medium text-sm leading-snug uppercase hover:bg-blue-700 focus:bg-customblue focus:outline-none focus:ring-0 transition duration-150 ease-in-out" +
-                (currentCourtType ? null : toggleButtonsClass)
-              }
               onClick={() => {
                 toggleCourtType(!currentCourtType);
               }}
+              className={
+                "rounded-r-3xl my-3 inline-block px-7 py-3 text-white font-medium text-sm leading-snug uppercase hover:bg-blue-700 focus:bg-customblue focus:outline-none focus:ring-0 transition duration-150 ease-in-out" +
+                (currentCourtType ? " bg-customblue/20" : toggleButtonsClass)
+              }
             >
               Outdoor
             </button>
