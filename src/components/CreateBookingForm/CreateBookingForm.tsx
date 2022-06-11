@@ -37,6 +37,13 @@ const BookingForm = ({
   const checkIfBookingIsFull = () =>
     inputsData.player2 && inputsData.player3 && inputsData.player4;
 
+  const displayedBookingStatus = () => {
+    if (openBooking) {
+      return checkIfBookingIsFull() ? "cerrada" : "abierta";
+    }
+    return "cerrada";
+  };
+
   const [currentCourtType, toggleCourtType] = useState(true);
   const toggleButtonsClass = " bg-customblue";
 
@@ -134,9 +141,15 @@ const BookingForm = ({
             <button
               value={inputsData.courtType}
               type="button"
-              onClick={() => {
-                toggleCourtType(!currentCourtType);
-              }}
+              onClick={
+                currentCourtType
+                  ? () => {
+                      toggleCourtType(currentCourtType);
+                    }
+                  : () => {
+                      toggleCourtType(!currentCourtType);
+                    }
+              }
               className={
                 "rounded-l-3xl my-3 inline-block px-7 py-3 text-white font-medium text-sm leading-snug uppercase hover:bg-blue-700 focus:bg-customblue focus:outline-none focus:ring-0 transition duration-150 ease-in-out" +
                 (currentCourtType ? toggleButtonsClass : " bg-customblue/20")
@@ -146,9 +159,15 @@ const BookingForm = ({
             </button>
             <button
               type="button"
-              onClick={() => {
-                toggleCourtType(!currentCourtType);
-              }}
+              onClick={
+                !currentCourtType
+                  ? () => {
+                      toggleCourtType(currentCourtType);
+                    }
+                  : () => {
+                      toggleCourtType(!currentCourtType);
+                    }
+              }
               className={
                 "rounded-r-3xl my-3 inline-block px-7 py-3 text-white font-medium text-sm leading-snug uppercase hover:bg-blue-700 focus:bg-customblue focus:outline-none focus:ring-0 transition duration-150 ease-in-out" +
                 (currentCourtType ? " bg-customblue/20" : toggleButtonsClass)
@@ -184,7 +203,7 @@ const BookingForm = ({
           className="bg-customblue/20 border border-gray-300 text-black text-sm rounded-lg focus:ring-customblue focus:border-customblue block w-full p-2.5"
         >
           <option defaultValue={players[1]}>{usernames[1] ?? ""}</option>
-          {!editMode ?? <option value=""></option>}
+          {usernames[1] ? <option value=""></option> : null}
           <option value="629e05f4ab6c6e669141df9b">Bautista</option>
           <option value="629e0393ab6c6e669141df98">Arumi</option>
         </select>
@@ -200,7 +219,7 @@ const BookingForm = ({
           className="bg-customblue/20 border border-gray-300 text-black text-sm rounded-lg focus:ring-customblue focus:border-customblue block w-full p-2.5"
         >
           <option defaultValue={players[2]}>{usernames[2] ?? ""}</option>
-          {!editMode ?? <option value=""></option>}
+          {usernames[2] ? <option value=""></option> : null}
           <option value="629e05f4ab6c6e669141df9b">Bautista</option>
           <option value="629e0393ab6c6e669141df98">Arumi</option>
         </select>
@@ -216,24 +235,20 @@ const BookingForm = ({
           className="bg-customblue/20 border border-gray-300 text-black text-sm rounded-lg focus:ring-customblue focus:border-customblue block w-full p-2.5"
         >
           <option defaultValue={players[3]}>{usernames[3] ?? ""}</option>
-          {!editMode ?? <option value=""></option>}
+          {usernames[3] ? <option value=""></option> : null}
           <option value="629e05f4ab6c6e669141df9b">Bautista</option>
           <option value="629e0393ab6c6e669141df98">Arumi</option>
         </select>
 
         <div className="flex my-5">
-          <p className="mx-4">
-            Partida{" "}
-            {openBooking
-              ? checkIfBookingIsFull()
-                ? "cerrada"
-                : "abierta"
-              : "cerrada"}
-          </p>
+          <p className="mx-4">Partida {displayedBookingStatus()}</p>
           <div
             className={
               "md:w-14 md:h-7 w-12 h-6 flex items-center bg-customblue rounded-full p-1 cursor-pointer " +
-              (checkIfBookingIsFull() ? "pointer-events-none bg-gray-300" : "")
+              (checkIfBookingIsFull()
+                ? "pointer-events-none  bg-gray-300"
+                : "") +
+              (!openBooking ? " bg-gray-300" : "")
             }
             onClick={() => {
               toggleOpenBooking(checkIfBookingIsFull() ? false : !openBooking);
