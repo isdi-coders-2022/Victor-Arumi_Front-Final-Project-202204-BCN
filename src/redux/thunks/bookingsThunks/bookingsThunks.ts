@@ -104,7 +104,7 @@ export const createBookingThunk =
 
 export const editBookingThunk =
   (submittedUpdatedBookingData: ICreateSubmittedBooking, id: string) =>
-  async (dispatch: AppDispatch) => {
+  async () => {
     const updateToastId = toast.loading("Actualizando reserva...", {
       type: "default",
       isLoading: true,
