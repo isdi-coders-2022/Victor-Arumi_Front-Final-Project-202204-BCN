@@ -1,26 +1,28 @@
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import BookingForm from "../../components/BookingForm/BookingForm";
-import { useAppSelector } from "../../redux/store/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
+import { getBookingAndPlayersUsernamesThunk } from "../../redux/thunks/bookingsThunks/bookingsThunks";
 
 const EditBookingPage = (): JSX.Element => {
   const bookings = useAppSelector((state) => state.bookings);
+  const { playersUsernames } = useAppSelector((state) => state.booking);
+
   const { id } = useParams();
   const bookingToEdit: any = bookings.find((booking) => booking.id === id);
 
-  const bookingPlayersUsernames: string[] = [
-    "jugadorsito1",
-    "jugadorsito2",
-    "ale galan",
-    "auuuuuuha",
-  ];
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    try {
+      dispatch(getBookingAndPlayersUsernamesThunk(id ?? ""));
+    } catch (error) {}
+  }, [dispatch, id]);
 
   return (
     <div className="bg-customblue/20">
       <h2 className="text-center my-5 text-3xl">Editar reserva</h2>
-      <BookingForm
-        booking={bookingToEdit}
-        usernames={bookingPlayersUsernames}
-      />
+      <BookingForm booking={bookingToEdit} usernames={playersUsernames} />
     </div>
   );
 };
