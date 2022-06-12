@@ -30,9 +30,10 @@ const Booking = ({
 
   const navigate = useNavigate();
   const goToEditPage = (): void => navigate(`/bookings/editBooking/${id}`);
+  const goToDetailPage = (): void => navigate(`/bookings/detail/${id}`);
 
   return (
-    <BookingStyled>
+    <BookingStyled onClick={goToDetailPage}>
       <div className="booking-info-container">
         <div className="club-container">
           <h3>{club}</h3>

@@ -57,7 +57,7 @@ function App() {
             }
           />
           <Route
-            path="/bookings/detail"
+            path="/bookings/detail/:id"
             element={
               <LoginControl>
                 <BookingDetailPage />
