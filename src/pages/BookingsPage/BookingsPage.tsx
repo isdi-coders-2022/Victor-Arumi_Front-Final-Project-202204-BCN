@@ -12,7 +12,7 @@ const BookingsPage = (): JSX.Element => {
   }, [dispatch]);
 
   return (
-    <div className="bg-customblue/20">
+    <div className="bg-customblue/20 h-full">
       <h2 className="text-center my-5 text-3xl">Reservas</h2>
       <BookingsList bookings={bookings} />
     </div>
