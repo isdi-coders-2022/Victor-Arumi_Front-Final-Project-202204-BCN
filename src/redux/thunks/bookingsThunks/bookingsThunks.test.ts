@@ -10,6 +10,7 @@ import {
 import {
   createBookingThunk,
   deleteBookingThunk,
+  editBookingThunk,
   loadBookingsThunk,
 } from "./bookingsThunks";
 
@@ -69,6 +70,26 @@ describe("Given a CreateBookingThunk", () => {
       });
 
       const thunk = createBookingThunk(createdBooking);
+
+      await thunk(dispatch);
+
+      expect(dispatch).toHaveBeenCalled();
+    });
+  });
+});
+
+describe("Given a EditBookingThunk with valid edited bookingFormData", () => {
+  describe("When it is called", () => {
+    test("Then it should call dispatch with a createBooking action", async () => {
+      const dispatch: Dispatch = jest.fn();
+
+      const createdBooking = mockBookings[0];
+
+      axios.put = jest.fn().mockResolvedValue({
+        data: { createdBookings: createdBooking },
+      });
+
+      const thunk = editBookingThunk(createdBooking, createdBooking.id);
 
       await thunk(dispatch);
 

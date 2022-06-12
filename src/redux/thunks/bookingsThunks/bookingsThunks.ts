@@ -110,7 +110,7 @@ export const createBookingThunk =
 
 export const editBookingThunk =
   (submittedUpdatedBookingData: ICreateSubmittedBooking, id: string) =>
-  async () => {
+  async (dispatch: AppDispatch) => {
     const updateToastId = toast.loading("Actualizando reserva...", {
       type: "default",
       isLoading: true,
@@ -130,6 +130,21 @@ export const editBookingThunk =
         isLoading: false,
         autoClose: 800,
       });
+      dispatch(
+        getBookingAndPlayersActionCreator({
+          booking: {
+            id: "",
+            club: "",
+            owner: "",
+            date: "",
+            hour: "",
+            courtType: "",
+            players: [],
+            open: true,
+          },
+          playersUsernames: [],
+        })
+      );
     } catch (error: any) {
       toast.update(updateToastId, {
         render: `Error al crear actualizar la reserva: ${error.response.data.msg}`,

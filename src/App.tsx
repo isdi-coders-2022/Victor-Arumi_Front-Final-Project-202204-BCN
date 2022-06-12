@@ -6,6 +6,7 @@ import AppStyled from "./AppStyled";
 import LoginControl from "./components/LoginControl/LoginControl";
 import LogoutControl from "./components/LogoutControl/LogoutControl";
 import NavBar from "./components/NavBar/NavBar";
+import BookingDetailPage from "./pages/BookingDetailPage/BookingDetailPage";
 import BookingsPage from "./pages/BookingsPage/BookingsPage";
 import CreateBookingPage from "./pages/CreateBookingPage/CreateBookingPage";
 import EditBookingPage from "./pages/EditBookingPage/EditBookingPage";
@@ -52,6 +53,14 @@ function App() {
             element={
               <LoginControl>
                 <CreateBookingPage />
+              </LoginControl>
+            }
+          />
+          <Route
+            path="/bookings/detail"
+            element={
+              <LoginControl>
+                <BookingDetailPage />
               </LoginControl>
             }
           />
