@@ -11,23 +11,29 @@ import {
   faTrash,
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
-import { IBooking } from "../../types/types";
-import { useAppDispatch } from "../../redux/store/hooks";
-import { deleteBookingThunk } from "../../redux/thunks/bookingsThunks/bookingsThunks";
-import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
+import {
+  deleteBookingThunk,
+  getBookingAndPlayersUsernamesThunk,
+} from "../../redux/thunks/bookingsThunks/bookingsThunks";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
 
-interface Props {
-  booking: IBooking;
-}
-
-const BookingDetail = ({
-  booking: { club, date, hour, courtType, open, id },
-}: Props): JSX.Element => {
+const BookingDetail = (): JSX.Element => {
+  const { id } = useParams();
   const dispatch = useAppDispatch();
-  const deleteBooking = () => {
-    dispatch(deleteBookingThunk(id));
-  };
 
+  useEffect(() => {
+    dispatch(getBookingAndPlayersUsernamesThunk(id as string));
+  }, [dispatch, id]);
+
+  const { booking, playersUsernames } = useAppSelector(
+    (state) => state.booking
+  );
+
+  const deleteBooking = () => {
+    dispatch(deleteBookingThunk(id as string));
+  };
   const navigate = useNavigate();
   const goToEditPage = (): void => navigate(`/bookings/editBooking/${id}`);
 
@@ -36,7 +42,7 @@ const BookingDetail = ({
       <div className="non-detail-container">
         <div className="booking-info-container">
           <div className="club-container">
-            <h3>{club}</h3>
+            <h3>{booking.club}</h3>
             <span>logo</span>
           </div>
           <div className="data-container">
@@ -44,25 +50,25 @@ const BookingDetail = ({
               <span>
                 <FontAwesomeIcon icon={faCalendar} />
               </span>
-              <p>{date}</p>
+              <p>{booking.date}</p>
             </div>
             <div className="data-container_item">
               <span>
                 <FontAwesomeIcon icon={faClock} />
               </span>
-              <p>{hour}</p>
+              <p>{booking.hour}</p>
             </div>
             <div className="data-container_item">
               <span>
                 <FontAwesomeIcon icon={faHome} />
               </span>
-              <p>{courtType}</p>
+              <p>{booking.courtType}</p>
             </div>
             <div className="data-container_item">
               <span>
                 <FontAwesomeIcon icon={faLock} />
               </span>
-              <p>{`${open ? "Reserva abierta" : "Reserva cerrada"}`}</p>
+              <p>{`${booking.open ? "Reserva abierta" : "Reserva cerrada"}`}</p>
             </div>
           </div>
         </div>
@@ -81,11 +87,11 @@ const BookingDetail = ({
       </div>
       <span className="border-t-2 border-customblue/20 pb-5 mt-5  w-3/4"></span>
       <div className="detail-container">
-        <p className="text-center mb-2"> Jugadores</p>
+        <p className="text-center mb-2">Jugadores</p>
 
         <div className="player-info">
           <h4 className="player-info_player-name bg-customblue/20  border border-gray-300 -sm rounded-lg ">
-            Player1
+            {playersUsernames[0] ?? "Sin asignar"}
           </h4>
           <img
             src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
@@ -95,7 +101,7 @@ const BookingDetail = ({
         </div>
         <div className="player-info">
           <h4 className="player-info_player-name bg-customblue/20  border border-gray-300 -sm rounded-lg ">
-            Player2
+            {playersUsernames[1] ?? "Sin asignar"}
           </h4>
           <img
             src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
@@ -105,7 +111,7 @@ const BookingDetail = ({
         </div>
         <div className="player-info">
           <h4 className="player-info_player-name bg-customblue/20  border border-gray-300 -sm rounded-lg ">
-            Player3
+            {playersUsernames[2] ?? "Sin asignar"}
           </h4>
           <img
             src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
@@ -115,7 +121,7 @@ const BookingDetail = ({
         </div>
         <div className="player-info">
           <h4 className="player-info_player-name bg-customblue/20  border border-gray-300 -sm rounded-lg ">
-            Player4
+            {playersUsernames[3] ?? "Sin asignar"}
           </h4>
           <img
             src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
