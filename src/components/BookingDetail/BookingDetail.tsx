@@ -85,7 +85,7 @@ const BookingDetail = (): JSX.Element => {
           </button>
         </div>
       </div>
-      <span className="border-t-2 border-customblue/20 pb-5 mt-5  w-3/4"></span>
+      <span className="border-t-2 border-customblue/20 pb-5 mt-5  w-4/6"></span>
       <div className="detail-container">
         <p className="text-center mb-2">Jugadores</p>
 
@@ -130,7 +130,9 @@ const BookingDetail = (): JSX.Element => {
           />
         </div>
         <p className="text-center mt-3"> Dueño de la reserva:</p>
-        <p className="text-center font-bold"> Alejandro</p>
+        <p className="text-center font-bold capitalize">
+          {playersUsernames[0]}
+        </p>
       </div>
     </BookingDetailStyled>
   );
