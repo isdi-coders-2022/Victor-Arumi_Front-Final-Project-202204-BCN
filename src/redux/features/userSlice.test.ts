@@ -8,6 +8,7 @@ const initialUserState = {
   username: "",
   name: "",
   profilePicture: "",
+  profilePictureBackup: "",
   logged: token,
 };
 
@@ -22,6 +23,7 @@ describe("Given a userSlice reducer", () => {
         username: inputUsername,
         name: "",
         profilePicture: "",
+        profilePictureBackup: "",
         logged: false,
       };
 
@@ -37,11 +39,14 @@ describe("Given a userSlice reducer", () => {
       const loggedId = "tysonid";
       const loggedUserName = "Tyson";
       const loggedUserProfilePicture = "MikeTyson.jpg";
+      const loggedprofilePictureBackup = "thebackup.jpg";
+
       const payload = {
         id: loggedId,
         username: inputUsername,
         name: loggedUserName,
         profilePicture: loggedUserProfilePicture,
+        profilePictureBackup: loggedprofilePictureBackup,
       };
 
       const expectedNewUser = {
@@ -49,6 +54,7 @@ describe("Given a userSlice reducer", () => {
         username: inputUsername,
         name: loggedUserName,
         profilePicture: loggedUserProfilePicture,
+        profilePictureBackup: loggedprofilePictureBackup,
         logged: true,
       };
 
