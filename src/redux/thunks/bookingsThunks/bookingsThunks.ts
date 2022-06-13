@@ -28,28 +28,29 @@ const getAuthData = () => {
   };
 };
 
-export const loadBookingsThunk = () => async (dispatch: AppDispatch) => {
-  const url: string = `${process.env.REACT_APP_API_URL}bookings`;
+export const loadBookingsThunk =
+  (limit: number, page: number) => async (dispatch: AppDispatch) => {
+    const url: string = `${process.env.REACT_APP_API_URL}bookings/limit=${limit}&page=${page}`;
 
-  const loadToastId = toast.loading("Cargando contenido...", {
-    isLoading: true,
-    type: "default",
-    position: "top-center",
-    closeOnClick: true,
-  });
+    const loadToastId = toast.loading("Cargando contenido...", {
+      isLoading: true,
+      type: "default",
+      position: "top-center",
+      closeOnClick: true,
+    });
 
-  const {
-    data: { bookings },
-  } = await axios.get<AxiosGetBookingsResponse>(url, getAuthData());
+    const {
+      data: { bookings },
+    } = await axios.get<AxiosGetBookingsResponse>(url, getAuthData());
 
-  dispatch(loadBookingsActionCreator(bookings));
+    dispatch(loadBookingsActionCreator(bookings));
 
-  toast.update(loadToastId, {
-    type: toast.TYPE.DEFAULT,
-    isLoading: false,
-    autoClose: 50,
-  });
-};
+    toast.update(loadToastId, {
+      type: toast.TYPE.DEFAULT,
+      isLoading: false,
+      autoClose: 50,
+    });
+  };
 
 export const deleteBookingThunk =
   (bookingIdToDelete: string) => async (dispatch: AppDispatch) => {
