@@ -107,7 +107,7 @@ const BookingForm = ({
             className="bg-customblue/20 mb-2 border border-gray-300 text-black text-sm rounded-lg focus:ring-customblue focus:border-customblue block w-full p-2.5"
           >
             <option defaultValue={club}>{club}</option>
-            <option value="RCTB-1899">RCTB-1899</option>
+            <option value="RCTB">RCTB-1899</option>
             <option value="Vall Parc">Vall Parc Club Esportiu</option>
             <option value="RCPB">Real Club de Polo BCN</option>
           </select>

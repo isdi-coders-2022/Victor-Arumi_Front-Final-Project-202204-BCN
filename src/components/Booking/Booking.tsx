@@ -12,7 +12,7 @@ import {
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { IBooking } from "../../types/types";
-import { useAppDispatch } from "../../redux/store/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
 import { deleteBookingThunk } from "../../redux/thunks/bookingsThunks/bookingsThunks";
 import { useNavigate } from "react-router-dom";
 import React from "react";
@@ -22,12 +22,13 @@ interface Props {
 }
 
 const Booking = ({
-  booking: { club, date, hour, courtType, open, id },
+  booking: { club, date, hour, courtType, open, id, owner },
 }: Props): JSX.Element => {
   const dispatch = useAppDispatch();
   const deleteBooking = () => {
     dispatch(deleteBookingThunk(id));
   };
+  const { id: userId } = useAppSelector((state) => state.user);
 
   const navigate = useNavigate();
   const goToEditPage = (event: React.SyntheticEvent): void => {
@@ -38,6 +39,8 @@ const Booking = ({
     event.stopPropagation();
     navigate(`/bookings/detail/${id}`);
   };
+
+  const userBooking = owner === userId;
 
   return (
     <BookingStyled onClick={goToDetailPage}>
@@ -69,19 +72,24 @@ const Booking = ({
             <span>
               <FontAwesomeIcon icon={faLock} />
             </span>
-            <p>{`${open ? "Reserva abierta" : "Reserva cerrada"}`}</p>
+            <p>Reserva{`${open ? " abierta" : " cerrada"}`}</p>
           </div>
         </div>
       </div>
 
-      <div className="booking-buttons-container">
-        <button onClick={goToEditPage}>
+      <div
+        className={
+          "booking-buttons-container" +
+          (!userBooking ? " booking-buttons-container--not-owner" : "")
+        }
+      >
+        <button hidden={!userBooking} onClick={goToEditPage}>
           <FontAwesomeIcon icon={faPenToSquare} />
         </button>
-        <button>
+        <button className="add-button" hidden={userBooking || !open}>
           <FontAwesomeIcon icon={faUserPlus} />
         </button>
-        <button onClick={deleteBooking}>
+        <button hidden={!userBooking} onClick={deleteBooking}>
           <FontAwesomeIcon icon={faTrash} />
         </button>
       </div>

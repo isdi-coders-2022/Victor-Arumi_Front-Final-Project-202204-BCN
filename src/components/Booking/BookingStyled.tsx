@@ -42,6 +42,9 @@ const BookingStyled = styled.div`
       p {
         margin-left: 5px;
       }
+      .open {
+        color: #47ca89;
+      }
     }
   }
   .club-container {
@@ -66,6 +69,14 @@ const BookingStyled = styled.div`
     margin: 10px 10px;
     justify-content: space-between;
     font-size: 2.2rem;
+
+    &--not-owner {
+      justify-content: center;
+    }
+
+    .add-button {
+      color: #2563eb;
+    }
   }
 `;
 
