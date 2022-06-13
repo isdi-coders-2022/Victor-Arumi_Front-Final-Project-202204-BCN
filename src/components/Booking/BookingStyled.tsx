@@ -66,6 +66,10 @@ const BookingStyled = styled.div`
     margin: 10px 10px;
     justify-content: space-between;
     font-size: 2.2rem;
+
+    &--not-owner {
+      justify-content: center;
+    }
   }
 `;
 
