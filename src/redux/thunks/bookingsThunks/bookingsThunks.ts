@@ -29,8 +29,18 @@ const getAuthData = () => {
 };
 
 export const loadBookingsThunk =
-  (limit: number, page: number) => async (dispatch: AppDispatch) => {
-    const url: string = `${process.env.REACT_APP_API_URL}bookings/limit=${limit}&page=${page}`;
+  (limit: number, page: number, type: string, status: string, date: string) =>
+  async (dispatch: AppDispatch) => {
+    const typeParam = type ? `&type=${type}` : "";
+    const statusParam = status ? `&status=${true}` : "";
+    const dateParam = date ? `&date=${date}` : "";
+
+    const params =
+      typeParam || statusParam || dateParam
+        ? "?" + typeParam + statusParam + dateParam
+        : "";
+
+    const url: string = `${process.env.REACT_APP_API_URL}bookings/limit=${limit}&page=${page}${params}`;
 
     const loadToastId = toast.loading("Cargando contenido...", {
       isLoading: true,
