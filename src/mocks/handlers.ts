@@ -29,13 +29,4 @@ export const handlers = [
   rest.get(`${process.env.REACT_APP_API_URL}bookings`, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json({ bookings: mockBookings }));
   }),
-  rest.post(
-    `${process.env.REACT_APP_API_URL}bookings/create`,
-    (req, res, ctx) => {
-      return res(
-        ctx.status(201),
-        ctx.json({ createdBooking: mockBookings[0] })
-      );
-    }
-  ),
 ];
