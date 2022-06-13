@@ -15,6 +15,7 @@ import { IBooking } from "../../types/types";
 import { useAppDispatch } from "../../redux/store/hooks";
 import { deleteBookingThunk } from "../../redux/thunks/bookingsThunks/bookingsThunks";
 import { useNavigate } from "react-router-dom";
+import React from "react";
 
 interface Props {
   booking: IBooking;
@@ -29,8 +30,14 @@ const Booking = ({
   };
 
   const navigate = useNavigate();
-  const goToEditPage = (): void => navigate(`/bookings/editBooking/${id}`);
-  const goToDetailPage = (): void => navigate(`/bookings/detail/${id}`);
+  const goToEditPage = (event: React.SyntheticEvent): void => {
+    event.stopPropagation();
+    navigate(`/bookings/editBooking/${id}`);
+  };
+  const goToDetailPage = (event: React.SyntheticEvent): void => {
+    event.stopPropagation();
+    navigate(`/bookings/detail/${id}`);
+  };
 
   return (
     <BookingStyled onClick={goToDetailPage}>
