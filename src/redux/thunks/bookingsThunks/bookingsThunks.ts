@@ -29,15 +29,23 @@ const getAuthData = () => {
 };
 
 export const loadBookingsThunk =
-  (limit: number, page: number, type: string, status: string, date: string) =>
+  (
+    limit: number,
+    page: number,
+    type: string,
+    status: string,
+    date: string,
+    user: string
+  ) =>
   async (dispatch: AppDispatch) => {
     const typeParam = type ? `&type=${type}` : "";
     const statusParam = status ? `&status=${true}` : "";
     const dateParam = date ? `&date=${date}` : "";
+    const userParam = user ? `&user=${user}` : "";
 
     const params =
-      typeParam || statusParam || dateParam
-        ? "?" + typeParam + statusParam + dateParam
+      typeParam || statusParam || dateParam || userParam
+        ? "?" + typeParam + statusParam + dateParam + userParam
         : "";
 
     const url: string = `${process.env.REACT_APP_API_URL}bookings/limit=${limit}&page=${page}${params}`;
