@@ -49,6 +49,14 @@ function App() {
             }
           />
           <Route
+            path="/bookings/mybookings/:username"
+            element={
+              <LoginControl>
+                <BookingsPage />
+              </LoginControl>
+            }
+          />
+          <Route
             path="/bookings/create"
             element={
               <LoginControl>

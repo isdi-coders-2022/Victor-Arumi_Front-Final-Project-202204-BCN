@@ -101,6 +101,14 @@ function NavBar() {
                           Nueva reserva
                         </Link>
                       </span>
+                      <span>
+                        <Link
+                          to={`/bookings/mybookings/${username}`}
+                          className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
+                        >
+                          Mis reservas
+                        </Link>
+                      </span>
                     </>
                   )}
                   {logged ? (
@@ -180,6 +188,14 @@ function NavBar() {
                         className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
                       >
                         Nueva reserva
+                      </Link>
+                    </span>
+                    <span onClick={closeNavBar}>
+                      <Link
+                        to={`/bookings/mybookings/${username}`}
+                        className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
+                      >
+                        Mis reservas
                       </Link>
                     </span>
                   </>
