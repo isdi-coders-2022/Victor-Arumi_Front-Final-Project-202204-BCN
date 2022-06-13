@@ -5,7 +5,6 @@ const BookingsPageStyled = styled.div`
   height: 100%;
 
   .filters-container {
-    border: 1px solid red;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -26,6 +25,11 @@ const BookingsPageStyled = styled.div`
       margin: 5px 0px;
       border: 1px solid rgb(25, 116, 182);
       border-radius: 1.5rem;
+
+      &--active {
+        background-color: rgb(25, 116, 182);
+        color: white;
+      }
     }
 
     @media (min-width: 710px) {
