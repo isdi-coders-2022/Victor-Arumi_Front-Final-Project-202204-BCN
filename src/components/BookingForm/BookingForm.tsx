@@ -75,7 +75,7 @@ const BookingForm = ({
         inputsData.player2,
         inputsData.player3,
         inputsData.player4,
-      ].filter((player) => player !== ""),
+      ].filter((player) => player !== "" && typeof player !== "undefined"),
       open: checkIfBookingIsFull() ? false : openBooking,
     };
 
