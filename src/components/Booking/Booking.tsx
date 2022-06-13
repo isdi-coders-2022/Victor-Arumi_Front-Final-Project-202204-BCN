@@ -72,7 +72,7 @@ const Booking = ({
             <span>
               <FontAwesomeIcon icon={faLock} />
             </span>
-            <p>{`${open ? "Reserva abierta" : "Reserva cerrada"}`}</p>
+            <p>Reserva{`${open ? " abierta" : " cerrada"}`}</p>
           </div>
         </div>
       </div>
@@ -86,7 +86,7 @@ const Booking = ({
         <button hidden={!userBooking} onClick={goToEditPage}>
           <FontAwesomeIcon icon={faPenToSquare} />
         </button>
-        <button hidden={userBooking || !open}>
+        <button className="add-button" hidden={userBooking || !open}>
           <FontAwesomeIcon icon={faUserPlus} />
         </button>
         <button hidden={!userBooking} onClick={deleteBooking}>
