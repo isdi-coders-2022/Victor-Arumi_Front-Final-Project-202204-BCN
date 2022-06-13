@@ -2,6 +2,7 @@ export interface UserSliceState {
   username: string;
   name: string;
   profilePicture: string;
+  profilePictureBackup: string;
   logged: boolean;
   id?: string;
 }
@@ -35,6 +36,7 @@ export interface LogInPayload {
   username: string;
   name: string;
   profilePicture: string;
+  profilePictureBackup: string;
 }
 
 export interface IRegisterForm {

@@ -7,9 +7,8 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
 function NavBar() {
-  const { logged, profilePicture, username } = useAppSelector(
-    (state) => state.user
-  );
+  const { logged, profilePicture, profilePictureBackup, username } =
+    useAppSelector((state) => state.user);
 
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useAppDispatch();
@@ -151,6 +150,14 @@ function NavBar() {
                     className="h-8 w-8 rounded-full bg-white"
                     src={`${process.env.REACT_APP_API_URL}uploads/images/${profilePicture}`}
                     alt="Foto de perfil"
+                    onError={(error: any) => {
+                      let backupSrc = profilePictureBackup
+                        ? profilePictureBackup
+                        : "";
+                      (error.target as HTMLImageElement).onerror = null;
+                      (error.target as HTMLImageElement).src =
+                        backupSrc as string;
+                    }}
                   />
                 </div>
               </div>

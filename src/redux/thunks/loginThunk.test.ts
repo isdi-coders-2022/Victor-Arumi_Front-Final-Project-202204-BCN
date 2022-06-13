@@ -14,6 +14,7 @@ jest.mock("jwt-decode", () => () => ({
   username: "Gerard",
   name: "Pique",
   profilePicture: "Bernabeu",
+  profilePictureBackup: "thebackup",
 }));
 
 describe("Given a loginThunk", () => {
@@ -26,6 +27,7 @@ describe("Given a loginThunk", () => {
         username: "Gerard",
         name: "Pique",
         profilePicture: "Bernabeu",
+        profilePictureBackup: "thebackup",
       };
 
       const loginAction = logInActionCreator(payload);
