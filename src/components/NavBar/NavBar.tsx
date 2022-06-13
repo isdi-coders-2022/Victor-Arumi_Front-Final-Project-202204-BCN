@@ -140,7 +140,7 @@ function NavBar() {
                 <div className="flex-shrink-0">
                   <img
                     crossOrigin=""
-                    className="h-8 w-8 rounded-full"
+                    className="h-8 w-8 rounded-full bg-white"
                     src={`${process.env.REACT_APP_API_URL}uploads/images/${profilePicture}`}
                     alt="Foto de perfil"
                   />
