@@ -27,7 +27,12 @@ describe("Given a loadBookingsThunk", () => {
 
       const loadBookingsAction = loadBookingsActionCreator(payload);
 
-      const thunk = loadBookingsThunk();
+      axios.get = jest.fn().mockResolvedValue({
+        status: 200,
+        data: { bookings: mockBookings },
+      });
+
+      const thunk = loadBookingsThunk(2, 1);
 
       await thunk(dispatch);
 
