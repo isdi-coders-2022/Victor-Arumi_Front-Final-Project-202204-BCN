@@ -47,7 +47,13 @@ const Booking = ({
       <div className="booking-info-container">
         <div className="club-container">
           <h3>{club}</h3>
-          <span>logo</span>
+          <div className="flex-shrink-0">
+            <img
+              className="h-12 w-12  rounded-full bg-white"
+              src={`../../images/${club.replace(" ", "")}.webp`}
+              alt="Logo Club"
+            />
+          </div>
         </div>
         <div className="data-container">
           <div className="data-container_item">
