@@ -14,7 +14,7 @@ const BookingsPage = (): JSX.Element => {
 
   const [user, setUser] = useState("");
 
-  const limit = 4;
+  const limit = 6;
   const initialPage = 1;
   const initialType = "";
   const initialStatus = "";
@@ -38,7 +38,6 @@ const BookingsPage = (): JSX.Element => {
   const [type, setType] = useState(initialType);
   const [status, setStatus] = useState(initialStatus);
   const [owner, setOwner] = useState(initialOwner);
-
   const [date, setDate] = useState(initialDate);
 
   useEffect(() => {
@@ -90,9 +89,6 @@ const BookingsPage = (): JSX.Element => {
         <h2 className="text-center my-5 text-3xl">
           {user ? "Mis reservas" : "Todas las reservas"}
         </h2>
-        {emptyPage ? (
-          <h3 className="text-center my-5 text-2xl">No hay más reservas</h3>
-        ) : null}
         <div className="filters-container">
           <div className="filters-container__section">
             <button
@@ -148,6 +144,9 @@ const BookingsPage = (): JSX.Element => {
           </div>
         </div>
         <BookingsList bookings={bookings} />
+        {emptyPage ? (
+          <h3 className="text-center my-5 text-2xl">No hay más reservas</h3>
+        ) : null}
         <div className="flex items-center text-center w-80 mb-6 justify-around ">
           <button
             className="disabled:opacity-50"
