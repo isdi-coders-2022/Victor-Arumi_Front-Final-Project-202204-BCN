@@ -50,6 +50,8 @@ const BookingDetail = (): JSX.Element => {
   const navigate = useNavigate();
   const goToEditPage = (): void => navigate(`/bookings/editBooking/${id}`);
 
+  const userBooking = booking.owner === userId;
+
   return (
     <BookingDetailStyled>
       <div className="non-detail-container">
@@ -87,13 +89,16 @@ const BookingDetail = (): JSX.Element => {
         </div>
 
         <div className="booking-buttons-container">
-          <button onClick={goToEditPage}>
+          <button onClick={goToEditPage} hidden={!userBooking}>
             <FontAwesomeIcon icon={faPenToSquare} />
           </button>
-          <button onClick={addUserToPlayers}>
+          <button
+            onClick={addUserToPlayers}
+            hidden={userBooking || !booking.open}
+          >
             <FontAwesomeIcon icon={faUserPlus} />
           </button>
-          <button onClick={deleteBooking}>
+          <button onClick={deleteBooking} hidden={!userBooking}>
             <FontAwesomeIcon icon={faTrash} />
           </button>
         </div>
