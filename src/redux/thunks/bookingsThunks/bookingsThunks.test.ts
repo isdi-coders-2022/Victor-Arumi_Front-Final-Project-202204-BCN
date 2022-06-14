@@ -32,7 +32,15 @@ describe("Given a loadBookingsThunk", () => {
         data: { bookings: mockBookings },
       });
 
-      const thunk = loadBookingsThunk(2, 1, "type", "status", "date", "id");
+      const thunk = loadBookingsThunk(
+        2,
+        1,
+        "type",
+        "status",
+        "date",
+        "id",
+        "owner"
+      );
 
       await thunk(dispatch);
 

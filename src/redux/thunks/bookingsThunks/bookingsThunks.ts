@@ -35,17 +35,19 @@ export const loadBookingsThunk =
     type: string,
     status: string,
     date: string,
-    user: string
+    user: string,
+    owner: string
   ) =>
   async (dispatch: AppDispatch) => {
     const typeParam = type ? `&type=${type}` : "";
     const statusParam = status ? `&status=${true}` : "";
     const dateParam = date ? `&date=${date}` : "";
     const userParam = user ? `&user=${user}` : "";
+    const ownerParam = owner ? `&owner=${owner}` : "";
 
     const params =
-      typeParam || statusParam || dateParam || userParam
-        ? "?" + typeParam + statusParam + dateParam + userParam
+      typeParam || statusParam || dateParam || userParam || ownerParam
+        ? "?" + typeParam + statusParam + dateParam + userParam + ownerParam
         : "";
 
     const url: string = `${process.env.REACT_APP_API_URL}bookings/limit=${limit}&page=${page}${params}`;

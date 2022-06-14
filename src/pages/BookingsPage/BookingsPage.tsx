@@ -19,10 +19,12 @@ const BookingsPage = (): JSX.Element => {
   const initialType = "";
   const initialStatus = "";
   const initialDate = "";
+  const initialOwner = "";
 
   useEffect(() => {
     if (username) {
       setUser(id as string);
+      setOwner(initialOwner);
       setPage(initialPage);
       setType(initialType);
       setStatus(initialStatus);
@@ -35,11 +37,13 @@ const BookingsPage = (): JSX.Element => {
   const [page, setPage] = useState(initialPage);
   const [type, setType] = useState(initialType);
   const [status, setStatus] = useState(initialStatus);
+  const [owner, setOwner] = useState(initialOwner);
+
   const [date, setDate] = useState(initialDate);
 
   useEffect(() => {
-    dispatch(loadBookingsThunk(limit, page, type, status, date, user));
-  }, [date, dispatch, page, status, type, user]);
+    dispatch(loadBookingsThunk(limit, page, type, status, date, user, owner));
+  }, [date, dispatch, owner, page, status, type, user]);
 
   const emptyPage = bookings.length === 0;
   const lastPage = bookings.length < limit;
@@ -51,6 +55,9 @@ const BookingsPage = (): JSX.Element => {
 
   const statusButtonOutput = () =>
     status === "" ? setStatus("open") : setStatus("");
+
+  const ownerButtonOutput = () =>
+    owner === "" ? setOwner(id as string) : setOwner("");
 
   const indoorButtonOutput = () => {
     if (type === "") {
@@ -106,15 +113,27 @@ const BookingsPage = (): JSX.Element => {
             </button>
           </div>
           <div className="filters-container__section">
-            <button
-              onClick={statusButtonOutput}
-              className={
-                "filters-container__button " +
-                (status === "open" ? "filters-container__button--active" : "")
-              }
-            >
-              Res. Abierta
-            </button>
+            {user ? (
+              <button
+                onClick={ownerButtonOutput}
+                className={
+                  "filters-container__button " +
+                  (owner ? "filters-container__button--active" : "")
+                }
+              >
+                Res. Propias
+              </button>
+            ) : (
+              <button
+                onClick={statusButtonOutput}
+                className={
+                  "filters-container__button " +
+                  (status === "open" ? "filters-container__button--active" : "")
+                }
+              >
+                Res. Abierta
+              </button>
+            )}
             <input
               type="date"
               onChange={changeDate}
