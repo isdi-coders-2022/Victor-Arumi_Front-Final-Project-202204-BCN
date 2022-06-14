@@ -206,10 +206,11 @@ const BookingForm = ({
         >
           <option defaultValue={players[1]}>{usernames[1] ?? ""}</option>
           {usernames[1] ? <option value=""></option> : null}
-          <option value="62a32b893425175ce845e6c1">Alejandro</option>
-          <option value="62a370a93425175ce845e6d3">kimiko</option>
-          <option value="62a46b5d3425175ce845e6fa">lekonen</option>
-          <option value="62a3a6358875bd6b7be217b0">Cdolz</option>
+          <option value="62a891c215c02ce1c436398f">Elon Musk</option>
+          <option value="62a88c1d15c02ce1c436398a">Dan Abramov</option>
+          <option value="62a8932915c02ce1c4363995">Sheldon Cooper</option>
+          <option value="62a894c315c02ce1c436399a">Paula Badosa</option>
+          <option value="62a896e915c02ce1c43639a6">Cdolz</option>
         </select>
         <label
           htmlFor="player3"
@@ -224,10 +225,11 @@ const BookingForm = ({
         >
           <option defaultValue={players[2]}>{usernames[2] ?? ""}</option>
           {usernames[2] ? <option value=""></option> : null}
-          <option value="62a32b893425175ce845e6c1">Alejandro</option>
-          <option value="62a370a93425175ce845e6d3">kimiko</option>
-          <option value="62a46b5d3425175ce845e6fa">lekonen</option>
-          <option value="62a3a6358875bd6b7be217b0">Cdolz</option>
+          <option value="62a891c215c02ce1c436398f">Elon Musk</option>
+          <option value="62a88c1d15c02ce1c436398a">Dan Abramov</option>
+          <option value="62a8932915c02ce1c4363995">Sheldon Cooper</option>
+          <option value="62a894c315c02ce1c436399a">Paula Badosa</option>
+          <option value="62a896e915c02ce1c43639a6">Cdolz</option>
         </select>
         <label
           htmlFor="player4"
@@ -242,10 +244,11 @@ const BookingForm = ({
         >
           <option defaultValue={players[3]}>{usernames[3] ?? ""}</option>
           {usernames[3] ? <option value=""></option> : null}
-          <option value="62a32b893425175ce845e6c1">Alejandro</option>
-          <option value="62a370a93425175ce845e6d3">kimiko</option>
-          <option value="62a46b5d3425175ce845e6fa">lekonen</option>
-          <option value="62a3a6358875bd6b7be217b0">Cdolz</option>
+          <option value="62a891c215c02ce1c436398f">Elon Musk</option>
+          <option value="62a88c1d15c02ce1c436398a">Dan Abramov</option>
+          <option value="62a8932915c02ce1c4363995">Sheldon Cooper</option>
+          <option value="62a894c315c02ce1c436399a">Paula Badosa</option>
+          <option value="62a896e915c02ce1c43639a6">Cdolz</option>
         </select>
 
         <div className="flex my-5">
