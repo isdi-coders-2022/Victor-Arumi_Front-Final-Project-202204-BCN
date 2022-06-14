@@ -47,7 +47,7 @@ const BookingDetailStyled = styled.div`
     display: flex;
     flex-direction: column;
     margin: 5px 0px 5px 50px;
-    width: 250px;
+    width: 300px;
     padding-top: 5px;
   }
 
@@ -90,6 +90,7 @@ const BookingDetailStyled = styled.div`
       font-size: 2rem;
       font-weight: bold;
       margin-right: 5px;
+      max-width: 100px;
     }
   }
 
@@ -100,6 +101,39 @@ const BookingDetailStyled = styled.div`
     margin: 10px 10px;
     justify-content: space-between;
     font-size: 2.2rem;
+  }
+
+  @media (min-width: 710px) {
+    flex-direction: row;
+    width: 690px;
+    height: 450px;
+
+    .separation-line {
+      transform: rotate(90deg);
+      padding: 0px;
+      margin: 0px;
+      width: 0px;
+    }
+    button {
+      padding-top: 20px;
+    }
+    .non-detail-container {
+      flex-direction: column;
+      align-items: center;
+      .booking-buttons-container {
+        flex-direction: row;
+        width: 150px;
+      }
+
+      .booking-info-container {
+        width: 250px;
+        margin-left: 80px;
+
+        .data-container {
+          width: 200px;
+        }
+      }
+    }
   }
 `;
 

@@ -76,7 +76,7 @@ function NavBar() {
             <div className="flex items-center">
               <div className="flex-shrink-0">
                 <img
-                  className="logo h-9 w-9"
+                  className={"h-9 w-9 " + (logged ? "logo " : "")}
                   src="https://tailwindui.com/img/logos/workflow-mark-white.svg"
                   alt="Workflow"
                 />
