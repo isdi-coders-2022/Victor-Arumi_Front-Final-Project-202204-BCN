@@ -176,6 +176,49 @@ export const editBookingThunk =
     }
   };
 
+export const addUserToBookingPlayersThunk =
+  (id: string, players: string[]) => async (dispatch: AppDispatch) => {
+    const updateToastId = toast.loading("Añadiendote a la reserva...", {
+      type: "default",
+      isLoading: true,
+      position: "top-center",
+    });
+
+    const repeatedPlayer = players
+      .slice(0, -1)
+      .includes(players[players.length - 1]);
+
+    if (repeatedPlayer) {
+      toast.update(updateToastId, {
+        render: `No te puedes añadir a una reserva en la que ya estás!`,
+        type: "error",
+        isLoading: false,
+        autoClose: 1000,
+      });
+      return;
+    }
+
+    const url: string = `${process.env.REACT_APP_API_URL}bookings/edit/addplayer/${id}`;
+    try {
+      await axios.put<AxiosCreateBookingResponse>(url, players, getAuthData());
+
+      toast.update(updateToastId, {
+        render: `Has sido añadido a la reserva!`,
+        type: "success",
+        isLoading: false,
+        autoClose: 800,
+      });
+      dispatch(getBookingAndPlayersUsernamesThunk(id as string));
+    } catch (error: any) {
+      toast.update(updateToastId, {
+        render: `Error al añadirte a la reserva`,
+        type: "error",
+        isLoading: false,
+        autoClose: 1000,
+      });
+    }
+  };
+
 export const getBookingAndPlayersUsernamesThunk =
   (requestedBookingId: string) => async (dispatch: AppDispatch) => {
     const url: string = `${process.env.REACT_APP_API_URL}bookings/detail/${requestedBookingId}`;
