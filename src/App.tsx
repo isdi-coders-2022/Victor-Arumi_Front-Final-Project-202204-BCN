@@ -11,6 +11,7 @@ import BookingsPage from "./pages/BookingsPage/BookingsPage";
 import CreateBookingPage from "./pages/CreateBookingPage/CreateBookingPage";
 import EditBookingPage from "./pages/EditBookingPage/EditBookingPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import { logInActionCreator } from "./redux/features/userSlice";
 import { useAppDispatch } from "./redux/store/hooks";
@@ -94,6 +95,14 @@ function App() {
               <LogoutControl>
                 <RegisterPage />
               </LogoutControl>
+            }
+          />
+          <Route
+            path="/*"
+            element={
+              <LoginControl>
+                <NotFoundPage />
+              </LoginControl>
             }
           />
         </Routes>
