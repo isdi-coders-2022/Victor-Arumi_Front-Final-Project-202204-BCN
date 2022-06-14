@@ -13,6 +13,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
 import {
+  addUserToBookingPlayersThunk,
   deleteBookingThunk,
   getBookingAndPlayersUsernamesThunk,
 } from "../../redux/thunks/bookingsThunks/bookingsThunks";
@@ -23,16 +24,28 @@ const BookingDetail = (): JSX.Element => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    dispatch(getBookingAndPlayersUsernamesThunk(id as string));
-  }, [dispatch, id]);
-
   const { booking, playersUsernames } = useAppSelector(
     (state) => state.booking
   );
 
+  const { id: userId } = useAppSelector((state) => state.user);
+
+  useEffect(() => {
+    dispatch(getBookingAndPlayersUsernamesThunk(id as string));
+  }, [dispatch, id]);
+
   const deleteBooking = () => {
     dispatch(deleteBookingThunk(id as string));
+  };
+
+  const addUserToPlayers = () => {
+    dispatch(
+      addUserToBookingPlayersThunk(id as string, [
+        ...booking.players,
+        userId as string,
+      ])
+    );
+    dispatch(getBookingAndPlayersUsernamesThunk(id as string));
   };
   const navigate = useNavigate();
   const goToEditPage = (): void => navigate(`/bookings/editBooking/${id}`);
@@ -77,7 +90,7 @@ const BookingDetail = (): JSX.Element => {
           <button onClick={goToEditPage}>
             <FontAwesomeIcon icon={faPenToSquare} />
           </button>
-          <button>
+          <button onClick={addUserToPlayers}>
             <FontAwesomeIcon icon={faUserPlus} />
           </button>
           <button onClick={deleteBooking}>
