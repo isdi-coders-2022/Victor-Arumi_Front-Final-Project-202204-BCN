@@ -7,8 +7,9 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
 function NavBar() {
-  const { logged, profilePicture, profilePictureBackup, username } =
-    useAppSelector((state) => state.user);
+  const { logged, profilePictureBackup, username } = useAppSelector(
+    (state) => state.user
+  );
 
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useAppDispatch();
@@ -75,7 +76,7 @@ function NavBar() {
             <div className="flex items-center">
               <div className="flex-shrink-0">
                 <img
-                  className="h-8 w-8"
+                  className="logo h-9 w-9"
                   src="https://tailwindui.com/img/logos/workflow-mark-white.svg"
                   alt="Workflow"
                 />
@@ -142,22 +143,13 @@ function NavBar() {
             </div>
             {logged ? (
               <div className="flex items-center">
-                <p className="text-white mr-5">{username}</p>
+                <p className="text-white mr-2">{username}</p>
 
                 <div className="flex-shrink-0">
                   <img
-                    crossOrigin=""
-                    className="h-8 w-8 rounded-full bg-white"
-                    src={`${process.env.REACT_APP_API_URL}uploads/images/${profilePicture}`}
+                    className="h-10 w-10 border border-customblue rounded-full bg-white"
+                    src={profilePictureBackup}
                     alt="Foto de perfil"
-                    onError={(error: any) => {
-                      let backupSrc = profilePictureBackup
-                        ? profilePictureBackup
-                        : "";
-                      (error.target as HTMLImageElement).onerror = null;
-                      (error.target as HTMLImageElement).src =
-                        backupSrc as string;
-                    }}
                   />
                 </div>
               </div>
