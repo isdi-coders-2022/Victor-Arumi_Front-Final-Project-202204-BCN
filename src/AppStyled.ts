@@ -6,8 +6,8 @@ const AppStyled = styled.div`
   height: 100%;
   min-width: 350px;
 
-  @media (min-width: 1200px) {
-    height: 100vh;
+  @media (min-width: 1242px) {
+    height: 106vh;
   }
 `;
 
