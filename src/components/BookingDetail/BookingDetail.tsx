@@ -58,7 +58,13 @@ const BookingDetail = (): JSX.Element => {
         <div className="booking-info-container">
           <div className="club-container">
             <h3>{booking.club}</h3>
-            <span>logo</span>
+            <div className="flex-shrink-0">
+              <img
+                className="h-24 w-24  rounded-full bg-white"
+                src={`../../images/${booking.club.replace(" ", "")}.webp`}
+                alt="Logo Club"
+              />
+            </div>
           </div>
           <div className="data-container">
             <div className="data-container_item">
@@ -103,7 +109,7 @@ const BookingDetail = (): JSX.Element => {
           </button>
         </div>
       </div>
-      <span className="border-t-2 border-customblue/20 pb-5 mt-5  w-4/6"></span>
+      <span className="separation-line border-t-2 border-customblue/20 pb-5 mt-5  w-4/6"></span>
       <div className="detail-container">
         <p className="text-center mb-2">Jugadores</p>
 
