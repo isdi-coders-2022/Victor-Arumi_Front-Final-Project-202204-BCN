@@ -76,9 +76,11 @@ const BookingsPage = (): JSX.Element => {
   };
 
   const nextPage = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
     setPage(page + 1);
   };
   const previousPage = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
     setPage(page - 1);
   };
 
