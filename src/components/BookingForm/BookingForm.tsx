@@ -109,7 +109,7 @@ const BookingForm = ({
             <option defaultValue={club}>{club}</option>
             <option value="RCTB">RCTB-1899</option>
             <option value="Vall Parc">Vall Parc Club Esportiu</option>
-            <option value="RCPB">Real Club de Polo BCN</option>
+            <option value="Wi Padel">Wi Padel</option>
           </select>
           <label
             htmlFor="date"
