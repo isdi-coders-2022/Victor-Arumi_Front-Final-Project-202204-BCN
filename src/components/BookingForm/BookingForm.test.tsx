@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import store from "../../redux/store";
 import BookingForm from "./BookingForm";
 import mockBookings from "../../mocks/mockBookings";
+import { BrowserRouter } from "react-router-dom";
 
 const mockDispatch = jest.fn();
 
@@ -20,9 +21,11 @@ describe("Given a CreateBooking component", () => {
       const totalSelects = 5;
 
       render(
-        <Provider store={store}>
-          <BookingForm booking={mockBookings[0]} usernames={[]} />
-        </Provider>
+        <BrowserRouter>
+          <Provider store={store}>
+            <BookingForm booking={mockBookings[0]} usernames={[]} />
+          </Provider>
+        </BrowserRouter>
       );
 
       const selects: HTMLElement[] = screen.getAllByRole("combobox");
@@ -42,9 +45,11 @@ describe("Given a CreateBooking component", () => {
       const outdoorButtonText = "Outdoor";
 
       render(
-        <Provider store={store}>
-          <BookingForm booking={mockBookings[0]} usernames={[]} />
-        </Provider>
+        <BrowserRouter>
+          <Provider store={store}>
+            <BookingForm booking={mockBookings[0]} usernames={[]} />
+          </Provider>
+        </BrowserRouter>
       );
 
       const loginButton = screen.getByRole("button", {
