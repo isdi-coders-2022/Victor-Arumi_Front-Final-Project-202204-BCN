@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Given a HomePage component When it's invoked) Then it should always match with this snapshot 1`] = `
+<div
+  className="sc-bczRLJ cyiygk"
+>
+  <h1
+    className="text-center"
+  >
+    Ups... página no encontrada
+  </h1>
+  <img
+    alt="Imagen de página de error"
+    src="../../images/404.webp"
+  />
+</div>
+`;
