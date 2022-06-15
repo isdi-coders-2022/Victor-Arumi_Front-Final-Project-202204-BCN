@@ -27,6 +27,7 @@ const registerThunk =
         type: "success",
         isLoading: false,
         autoClose: 800,
+        closeOnClick: true,
       });
     } catch (error: any) {
       toast.update(registerToastId, {
@@ -34,6 +35,7 @@ const registerThunk =
         type: "error",
         isLoading: false,
         autoClose: 1000,
+        closeOnClick: true,
       });
     }
   };
