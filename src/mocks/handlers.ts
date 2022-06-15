@@ -26,7 +26,10 @@ export const handlers = [
   rest.post(`${process.env.REACT_APP_API_URL}user/login`, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json({ token: mockToken }));
   }),
-  rest.get(`${process.env.REACT_APP_API_URL}bookings`, (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json({ bookings: mockBookings }));
-  }),
+  rest.get(
+    `${process.env.REACT_APP_API_URL}bookings/limit=6&page=1?type=Outdoor&status=true&day=2022-06-09&user=62a6f573650f14ef23b23a3b`,
+    (req, res, ctx) => {
+      return res(ctx.status(200), ctx.json({ bookings: mockBookings }));
+    }
+  ),
 ];
