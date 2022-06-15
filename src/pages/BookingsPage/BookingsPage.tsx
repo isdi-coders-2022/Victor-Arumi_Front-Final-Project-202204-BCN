@@ -75,20 +75,20 @@ const BookingsPage = (): JSX.Element => {
   };
 
   const nextPage = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
     setPage(page + 1);
+    setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 70);
   };
   const previousPage = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
     setPage(page - 1);
+    setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 70);
   };
 
   return (
     <BookingsPageStyled>
       <div className=" flex flex-col items-center ">
-        <h2 className="text-center my-5 text-3xl">
+        <h1 className="text-center my-5 text-3xl">
           {user ? "Mis reservas" : "Todas las reservas"}
-        </h2>
+        </h1>
         <div className="filters-container">
           <div className="filters-container__section">
             <button
@@ -133,6 +133,7 @@ const BookingsPage = (): JSX.Element => {
               </button>
             )}
             <input
+              title="Fecha"
               type="date"
               onChange={changeDate}
               value={date}

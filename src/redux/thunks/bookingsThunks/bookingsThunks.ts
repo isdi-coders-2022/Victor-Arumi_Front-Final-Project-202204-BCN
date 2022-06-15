@@ -69,6 +69,7 @@ export const loadBookingsThunk =
       type: toast.TYPE.DEFAULT,
       isLoading: false,
       autoClose: 50,
+      closeOnClick: true,
     });
   };
 
@@ -175,7 +176,8 @@ export const addUserToBookingPlayersThunk =
         render: `No te puedes añadir a una reserva en la que ya estás!`,
         type: "error",
         isLoading: false,
-        autoClose: 1000,
+        autoClose: 800,
+        closeOnClick: true,
       });
       return;
     }

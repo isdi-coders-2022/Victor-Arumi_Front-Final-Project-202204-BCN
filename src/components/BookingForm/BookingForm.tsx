@@ -191,7 +191,7 @@ const BookingForm = ({
               }
               className={
                 "rounded-r-3xl my-3 inline-block px-7 py-3 text-white font-medium text-sm leading-snug uppercase hover:bg-blue-700 focus:bg-customblue focus:outline-none focus:ring-0 transition duration-150 ease-in-out" +
-                (currentCourtType ? " bg-customblue/20" : toggleButtonsClass)
+                (currentCourtType ? " bg-customblue/40" : toggleButtonsClass)
               }
             >
               Outdoor
@@ -293,7 +293,7 @@ const BookingForm = ({
           </div>
         </div>
         <button
-          className=" my-4 rounded-3xl inline-block px-7 py-3 bg-customblue text-white font-medium text-sm leading-snug uppercase hover:bg-customblue focus:bg-customblue focus:outline-none focus:ring-0 transition duration-150 disabled:bg-customblue/20 ease-in-out"
+          className=" my-4 rounded-3xl inline-block px-7 py-3 bg-customblue text-white font-medium text-sm leading-snug uppercase hover:bg-customblue focus:bg-customblue focus:outline-none focus:ring-0 transition duration-150 disabled:bg-customblue/60 ease-in-out"
           type="submit"
           onClick={createBookingSubmit}
           disabled={submitButtonDisabled}
@@ -302,7 +302,7 @@ const BookingForm = ({
         </button>
         <p
           className={
-            "w-56  text-red-400 text-sm mb-6 " +
+            "w-56  text-red-600 text-sm mb-6 " +
             (!submitButtonDisabled ? "invisible" : "")
           }
         >
