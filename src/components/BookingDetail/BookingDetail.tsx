@@ -95,16 +95,25 @@ const BookingDetail = (): JSX.Element => {
         </div>
 
         <div className="booking-buttons-container">
-          <button onClick={goToEditPage} hidden={!userBooking}>
+          <button
+            title="Edit booking"
+            onClick={goToEditPage}
+            hidden={!userBooking}
+          >
             <FontAwesomeIcon icon={faPenToSquare} />
           </button>
           <button
+            title="Join booking"
             onClick={addUserToPlayers}
             hidden={userBooking || !booking.open}
           >
             <FontAwesomeIcon icon={faUserPlus} />
           </button>
-          <button onClick={deleteBooking} hidden={!userBooking}>
+          <button
+            title="Delete booking"
+            onClick={deleteBooking}
+            hidden={!userBooking}
+          >
             <FontAwesomeIcon icon={faTrash} />
           </button>
         </div>
