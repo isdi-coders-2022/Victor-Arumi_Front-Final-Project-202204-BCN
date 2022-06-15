@@ -8,7 +8,7 @@ import CreateBookingPage from "./CreateBookingPage";
 
 describe("Given a CreateBookingsPage component", () => {
   describe("When it's invoked", () => {
-    test("Then it should render a level 2 heading with text 'Crear reserva'", () => {
+    test("Then it should render a level 1 heading with text 'Crear reserva'", () => {
       const headingText = "Crear reserva";
 
       render(
@@ -20,7 +20,7 @@ describe("Given a CreateBookingsPage component", () => {
       );
 
       const heading: HTMLHeadingElement = screen.getByRole("heading", {
-        level: 2,
+        level: 1,
         name: headingText,
       });
 

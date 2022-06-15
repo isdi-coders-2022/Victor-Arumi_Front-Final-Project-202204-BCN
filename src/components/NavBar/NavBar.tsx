@@ -81,10 +81,18 @@ function NavBar() {
                   alt="Workflow"
                 />
               </div>
+
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
                   {logged && (
                     <>
+                      {" "}
+                      <h2 className="hidden text-xl text-yellow-100 first-letter:font-bold lg:block">
+                        Padel
+                      </h2>
+                      <h2 className="hidden text-xl text-yellow-100 mx-0 p-0 first-letter:font-bold lg:block">
+                        Bookings®
+                      </h2>
                       <span>
                         <Link
                           to={"/bookings"}
@@ -120,6 +128,12 @@ function NavBar() {
                     </p>
                   ) : (
                     <>
+                      <h2 className="invisible text-xl text-yellow-100 first-letter:font-bold md:visible">
+                        Padel
+                      </h2>
+                      <h2 className="invisible text-xl text-yellow-100 mx-0 p-0 first-letter:font-bold md:visible">
+                        Bookings®
+                      </h2>
                       <span>
                         <Link
                           to={"/login"}

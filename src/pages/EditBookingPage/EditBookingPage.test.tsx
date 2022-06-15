@@ -17,7 +17,7 @@ jest.mock("react-router-dom", () => ({
 
 describe("Given a EditBookingsPage component", () => {
   describe("When it's invoked", () => {
-    test("Then it should render a level 2 heading with text 'Editar reserva'", () => {
+    test("Then it should render a level 1 heading with text 'Editar reserva'", () => {
       const headingText = "Editar reserva";
 
       const mockBookingsSlice = createSlice({
@@ -59,7 +59,7 @@ describe("Given a EditBookingsPage component", () => {
       );
 
       const heading: HTMLHeadingElement = screen.getByRole("heading", {
-        level: 2,
+        level: 1,
         name: headingText,
       });
 
