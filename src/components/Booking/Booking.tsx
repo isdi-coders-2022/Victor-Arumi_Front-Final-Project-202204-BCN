@@ -104,7 +104,7 @@ const Booking = ({
         }
       >
         <button
-          title="Edit booking"
+          title="Editar reserva"
           hidden={!userBooking}
           onClick={goToEditPage}
         >
@@ -112,14 +112,14 @@ const Booking = ({
         </button>
         <button
           onClick={addUserToPlayers}
-          title="Join booking"
+          title="Unirse a esta reserva"
           className="add-button"
           hidden={userBooking || !open}
         >
           <FontAwesomeIcon icon={faUserPlus} />
         </button>
         <button
-          title="Delete booking"
+          title="Eliminar reserva"
           hidden={!userBooking}
           onClick={deleteBooking}
         >
