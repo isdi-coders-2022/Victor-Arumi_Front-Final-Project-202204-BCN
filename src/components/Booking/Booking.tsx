@@ -90,13 +90,25 @@ const Booking = ({
           (!userBooking ? " booking-buttons-container--not-owner" : "")
         }
       >
-        <button hidden={!userBooking} onClick={goToEditPage}>
+        <button
+          title="Edit booking"
+          hidden={!userBooking}
+          onClick={goToEditPage}
+        >
           <FontAwesomeIcon icon={faPenToSquare} />
         </button>
-        <button className="add-button" hidden={userBooking || !open}>
+        <button
+          title="Join booking"
+          className="add-button"
+          hidden={userBooking || !open}
+        >
           <FontAwesomeIcon icon={faUserPlus} />
         </button>
-        <button hidden={!userBooking} onClick={deleteBooking}>
+        <button
+          title="Delete booking"
+          hidden={!userBooking}
+          onClick={deleteBooking}
+        >
           <FontAwesomeIcon icon={faTrash} />
         </button>
       </div>
