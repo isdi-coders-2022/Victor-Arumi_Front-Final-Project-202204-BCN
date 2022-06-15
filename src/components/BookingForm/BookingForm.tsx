@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import "@fontsource/urbanist";
 
 import { IBooking, ICreateBookingForm } from "../../types/types";
@@ -7,6 +7,7 @@ import {
   createBookingThunk,
   editBookingThunk,
 } from "../../redux/thunks/bookingsThunks/bookingsThunks";
+import { useNavigate } from "react-router-dom";
 interface Props {
   booking: IBooking;
   usernames: string[];
@@ -32,8 +33,12 @@ const BookingForm = ({
     open: open,
   };
 
+  const [submitButtonDisabled, setSubmitButtonDisabled] =
+    useState<boolean>(true);
+
   const [openBooking, toggleOpenBooking] = useState(true);
   const openToggleClass = "transform translate-x-5";
+
   const checkIfBookingIsFull = () =>
     inputsData.player2 && inputsData.player3 && inputsData.player4;
 
@@ -59,6 +64,7 @@ const BookingForm = ({
     });
   };
 
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const createBookingSubmit = (event: { preventDefault: () => void }) => {
@@ -78,14 +84,27 @@ const BookingForm = ({
       ].filter((player) => player !== "" && typeof player !== "undefined"),
       open: checkIfBookingIsFull() ? false : openBooking,
     };
-
     if (editMode) {
       dispatch(editBookingThunk(formData, bookingId));
+      setTimeout(() => navigate(-1), 1000);
       return;
     }
     dispatch(createBookingThunk(formData));
-    setInputsData(initialFormValues);
+    setTimeout(() => navigate("/bookings"), 1000);
   };
+
+  const submitEnabled =
+    inputsData.owner &&
+    inputsData.club &&
+    inputsData.date &&
+    inputsData.hour &&
+    inputsData.courtType;
+
+  useEffect(() => {
+    submitEnabled
+      ? setSubmitButtonDisabled(false)
+      : setSubmitButtonDisabled(true);
+  }, [submitEnabled]);
 
   return (
     <div className="flex bg-white w-100m items-center justify-center ">
@@ -183,7 +202,7 @@ const BookingForm = ({
           htmlFor="player1"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
         >
-          Jugador 1
+          Jugador 1 (opcional)
         </label>
         <select
           disabled
@@ -197,7 +216,7 @@ const BookingForm = ({
           htmlFor="player2"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
         >
-          Jugador 2
+          Jugador 2 (opcional)
         </label>
         <select
           onChange={changeData}
@@ -216,7 +235,7 @@ const BookingForm = ({
           htmlFor="player3"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
         >
-          Jugador 3
+          Jugador 3 (opcional)
         </label>
         <select
           onChange={changeData}
@@ -235,7 +254,7 @@ const BookingForm = ({
           htmlFor="player4"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
         >
-          Jugador 4
+          Jugador 4 (opcional)
         </label>
         <select
           onChange={changeData}
@@ -274,12 +293,21 @@ const BookingForm = ({
           </div>
         </div>
         <button
-          className=" my-2 rounded-3xl my-3 inline-block px-7 py-3 bg-customblue text-white font-medium text-sm leading-snug uppercase hover:bg-blue-700 focus:bg-customblue focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
+          className=" my-4 rounded-3xl inline-block px-7 py-3 bg-customblue text-white font-medium text-sm leading-snug uppercase hover:bg-customblue focus:bg-customblue focus:outline-none focus:ring-0 transition duration-150 disabled:bg-customblue/20 ease-in-out"
           type="submit"
           onClick={createBookingSubmit}
+          disabled={submitButtonDisabled}
         >
           {editMode ? "Editar reserva" : "Crear Reserva"}
         </button>
+        <p
+          className={
+            "w-56  text-red-400 text-sm mb-6 " +
+            (!submitButtonDisabled ? "invisible" : "")
+          }
+        >
+          Completa todos los datos no opcionales para poder enviar el formulario
+        </p>
       </form>
     </div>
   );
