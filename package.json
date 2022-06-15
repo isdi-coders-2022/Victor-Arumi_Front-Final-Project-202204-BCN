@@ -78,6 +78,7 @@
       "src/**/*.ts",
       "src/**/*.tsx",
       "!src/index.tsx",
+      "!src/**/*.snap",
       "!src/reportWebVitals.ts",
       "!src/setupTests.ts",
       "!src/react-app-env.d.ts"
