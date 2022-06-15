@@ -31,14 +31,16 @@ const loginThunk =
         render: `!Bienvenido ${userDetails.username}!`,
         type: "success",
         isLoading: false,
-        autoClose: 800,
+        autoClose: 1100,
+        closeOnClick: true,
       });
     } catch (error: any) {
       toast.update(loginToastId, {
         render: `Algo ha salido mal: ${error.response.data.msg}`,
         type: "error",
         isLoading: false,
-        autoClose: 800,
+        autoClose: 1100,
+        closeOnClick: true,
       });
     }
   };
