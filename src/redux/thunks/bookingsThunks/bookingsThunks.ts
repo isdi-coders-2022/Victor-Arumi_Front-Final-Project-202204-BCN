@@ -103,30 +103,21 @@ export const createBookingThunk =
       position: "top-center",
     });
     const url: string = `${process.env.REACT_APP_API_URL}bookings/create`;
-    try {
-      const {
-        data: { createdBooking },
-      } = await axios.post<AxiosCreateBookingResponse>(
-        url,
-        submittedNewBookingData,
-        getAuthData()
-      );
+    const {
+      data: { createdBooking },
+    } = await axios.post<AxiosCreateBookingResponse>(
+      url,
+      submittedNewBookingData,
+      getAuthData()
+    );
 
-      dispatch(createBookingActionCreator(createdBooking));
-      toast.update(createBookingToastId, {
-        render: `Reserva creada con éxito`,
-        type: "success",
-        isLoading: false,
-        autoClose: 800,
-      });
-    } catch (error: any) {
-      toast.update(createBookingToastId, {
-        render: `Error al crear reserva: ${error.response.data.msg}`,
-        type: "error",
-        isLoading: false,
-        autoClose: 1000,
-      });
-    }
+    dispatch(createBookingActionCreator(createdBooking));
+    toast.update(createBookingToastId, {
+      render: `Reserva creada con éxito`,
+      type: "success",
+      isLoading: false,
+      autoClose: 800,
+    });
   };
 
 export const editBookingThunk =
@@ -138,42 +129,33 @@ export const editBookingThunk =
       position: "top-center",
     });
     const url: string = `${process.env.REACT_APP_API_URL}bookings/edit/${id}`;
-    try {
-      await axios.put<AxiosCreateBookingResponse>(
-        url,
-        submittedUpdatedBookingData,
-        getAuthData()
-      );
+    await axios.put<AxiosCreateBookingResponse>(
+      url,
+      submittedUpdatedBookingData,
+      getAuthData()
+    );
 
-      toast.update(updateToastId, {
-        render: `Reserva actualizada con éxito`,
-        type: "success",
-        isLoading: false,
-        autoClose: 800,
-      });
-      dispatch(
-        getBookingAndPlayersActionCreator({
-          booking: {
-            id: "",
-            club: "",
-            owner: "",
-            date: "",
-            hour: "",
-            courtType: "",
-            players: [],
-            open: true,
-          },
-          playersUsernames: [],
-        })
-      );
-    } catch (error: any) {
-      toast.update(updateToastId, {
-        render: `Error al crear actualizar la reserva: ${error.response.data.msg}`,
-        type: "error",
-        isLoading: false,
-        autoClose: 1000,
-      });
-    }
+    toast.update(updateToastId, {
+      render: `Reserva actualizada con éxito`,
+      type: "success",
+      isLoading: false,
+      autoClose: 800,
+    });
+    dispatch(
+      getBookingAndPlayersActionCreator({
+        booking: {
+          id: "",
+          club: "",
+          owner: "",
+          date: "",
+          hour: "",
+          courtType: "",
+          players: [],
+          open: true,
+        },
+        playersUsernames: [],
+      })
+    );
   };
 
 export const addUserToBookingPlayersThunk =
