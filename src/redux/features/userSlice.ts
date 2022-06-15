@@ -10,7 +10,7 @@ const initialState: UserSliceState = {
   name: "",
   profilePicture: "",
   profilePictureBackup: "",
-  logged: localStorage.getItem("token") ? true : false,
+  logged: false,
 };
 
 const userSlice = createSlice({
@@ -30,7 +30,7 @@ const userSlice = createSlice({
       name: "",
       profilePicture: "",
       profilePictureBackup: "",
-      logged: localStorage.getItem("token") ? true : false,
+      logged: false,
     }),
   },
 });
