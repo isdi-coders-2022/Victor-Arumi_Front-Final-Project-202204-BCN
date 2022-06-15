@@ -1,5 +1,6 @@
 import userReducer, {
   logInActionCreator,
+  logOutActionCreator,
   registerActionCreator,
 } from "./userSlice";
 
@@ -60,6 +61,39 @@ describe("Given a userSlice reducer", () => {
 
       const registerAction = logInActionCreator(payload);
       const newUserState = userReducer(initialUserState, registerAction);
+
+      expect(newUserState).toEqual(expectedNewUser);
+    });
+  });
+
+  describe("When it receives an state with a user a logout action", () => {
+    test("Then it should return the new state with the initial state", () => {
+      const loggedId = "tysonid";
+      const loggedUserName = "Tyson";
+      const loggedUserProfilePicture = "MikeTyson.jpg";
+      const loggedprofilePictureBackup = "thebackup.jpg";
+
+      token = true;
+
+      const currentUserState = {
+        id: loggedId,
+        username: inputUsername,
+        name: loggedUserName,
+        profilePicture: loggedUserProfilePicture,
+        profilePictureBackup: loggedprofilePictureBackup,
+        logged: true,
+      };
+
+      const expectedNewUser = {
+        username: "",
+        name: "",
+        profilePicture: "",
+        profilePictureBackup: "",
+        logged: false,
+      };
+
+      const logoutAction = logOutActionCreator();
+      const newUserState = userReducer(currentUserState, logoutAction);
 
       expect(newUserState).toEqual(expectedNewUser);
     });
