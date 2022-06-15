@@ -15,7 +15,7 @@ const EditBookingPage = (): JSX.Element => {
 
   useEffect(() => {
     try {
-      dispatch(getBookingAndPlayersUsernamesThunk(id ?? ""));
+      dispatch(getBookingAndPlayersUsernamesThunk(id as string));
     } catch (error) {}
   }, [dispatch, id]);
 
