@@ -25,7 +25,8 @@ const Booking = ({
   booking: { club, date, hour, courtType, open, id, owner },
 }: Props): JSX.Element => {
   const dispatch = useAppDispatch();
-  const deleteBooking = () => {
+  const deleteBooking = (event: React.SyntheticEvent): void => {
+    event.stopPropagation();
     dispatch(deleteBookingThunk(id));
   };
   const { id: userId } = useAppSelector((state) => state.user);
