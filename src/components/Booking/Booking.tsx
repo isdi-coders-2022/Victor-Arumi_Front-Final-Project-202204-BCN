@@ -13,7 +13,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { IBooking } from "../../types/types";
 import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
-import { deleteBookingThunk } from "../../redux/thunks/bookingsThunks/bookingsThunks";
+import {
+  addUserToBookingPlayersThunk,
+  deleteBookingThunk,
+  getBookingAndPlayersUsernamesThunk,
+} from "../../redux/thunks/bookingsThunks/bookingsThunks";
 import { useNavigate } from "react-router-dom";
 import React from "react";
 
@@ -22,7 +26,7 @@ interface Props {
 }
 
 const Booking = ({
-  booking: { club, date, hour, courtType, open, id, owner },
+  booking: { club, date, hour, courtType, open, id, owner, players },
 }: Props): JSX.Element => {
   const dispatch = useAppDispatch();
   const deleteBooking = (event: React.SyntheticEvent): void => {
@@ -32,6 +36,7 @@ const Booking = ({
   const { id: userId } = useAppSelector((state) => state.user);
 
   const navigate = useNavigate();
+
   const goToEditPage = (event: React.SyntheticEvent): void => {
     event.stopPropagation();
     navigate(`/bookings/editBooking/${id}`);
@@ -39,6 +44,14 @@ const Booking = ({
   const goToDetailPage = (event: React.SyntheticEvent): void => {
     event.stopPropagation();
     navigate(`/bookings/detail/${id}`);
+  };
+
+  const addUserToPlayers = (event: React.SyntheticEvent): void => {
+    event.stopPropagation();
+    dispatch(
+      addUserToBookingPlayersThunk(id as string, [...players, userId as string])
+    );
+    dispatch(getBookingAndPlayersUsernamesThunk(id as string));
   };
 
   const userBooking = owner === userId;
@@ -98,6 +111,7 @@ const Booking = ({
           <FontAwesomeIcon icon={faPenToSquare} />
         </button>
         <button
+          onClick={addUserToPlayers}
           title="Join booking"
           className="add-button"
           hidden={userBooking || !open}
