@@ -87,12 +87,12 @@ function NavBar() {
                   {logged && (
                     <>
                       {" "}
-                      <h2 className="hidden text-xl text-yellow-100 first-letter:font-bold lg:block">
+                      <p className="hidden text-xl text-yellow-100 first-letter:font-bold lg:block">
                         Padel
-                      </h2>
-                      <h2 className="hidden text-xl text-yellow-100 mx-0 p-0 first-letter:font-bold lg:block">
+                      </p>
+                      <p className="hidden text-xl text-yellow-100 mx-0 p-0 first-letter:font-bold lg:block">
                         Bookings®
-                      </h2>
+                      </p>
                       <span>
                         <Link
                           to={"/bookings"}
@@ -128,12 +128,12 @@ function NavBar() {
                     </p>
                   ) : (
                     <>
-                      <h2 className="invisible text-xl text-yellow-100 first-letter:font-bold md:visible">
+                      <p className="invisible text-xl text-yellow-100 first-letter:font-bold md:visible">
                         Padel
-                      </h2>
-                      <h2 className="invisible text-xl text-yellow-100 mx-0 p-0 first-letter:font-bold md:visible">
+                      </p>
+                      <p className="invisible text-xl text-yellow-100 mx-0 p-0 first-letter:font-bold md:visible">
                         Bookings®
-                      </h2>
+                      </p>
                       <span>
                         <Link
                           to={"/login"}
