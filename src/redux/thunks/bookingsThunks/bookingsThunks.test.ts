@@ -8,6 +8,7 @@ import {
 } from "../../features/bookingsSlice";
 
 import {
+  addUserToBookingPlayersThunk,
   createBookingThunk,
   deleteBookingThunk,
   editBookingThunk,
@@ -91,8 +92,8 @@ describe("Given a CreateBookingThunk", () => {
   });
 });
 
-describe("Given a EditBookingThunk with valid edited bookingFormData", () => {
-  describe("When it is called", () => {
+describe("Given a EditBookingThunk", () => {
+  describe("When it is called with valid edited bookingFormData", () => {
     test("Then it should call dispatch with a createBooking action", async () => {
       const dispatch: Dispatch = jest.fn();
 
@@ -107,6 +108,44 @@ describe("Given a EditBookingThunk with valid edited bookingFormData", () => {
       await thunk(dispatch);
 
       expect(dispatch).toHaveBeenCalled();
+    });
+  });
+});
+
+describe("Given a addUserToBookingPlayersThunk function", () => {
+  describe("When it is called with an array of 3 players and the last is not repeated", () => {
+    test("Then it should call dispatch", async () => {
+      const dispatch: Dispatch = jest.fn();
+      const bookingId = "testID";
+      const playersArray = ["player1", "player2", "player3"];
+
+      axios.put = jest.fn().mockResolvedValue({
+        data: {},
+      });
+
+      const thunk = addUserToBookingPlayersThunk(bookingId, playersArray);
+
+      await thunk(dispatch);
+
+      expect(dispatch).toHaveBeenCalled();
+    });
+  });
+
+  describe("When it is called with an array of 3 players and the last one is repeated", () => {
+    test("Then it should not call dispatch", async () => {
+      const dispatch: Dispatch = jest.fn();
+      const bookingId = "testID";
+      const playersArray = ["playerRepeated", "player2", "playerRepeated"];
+
+      axios.put = jest.fn().mockResolvedValue({
+        data: {},
+      });
+
+      const thunk = addUserToBookingPlayersThunk(bookingId, playersArray);
+
+      await thunk(dispatch);
+
+      expect(dispatch).not.toHaveBeenCalled();
     });
   });
 });
