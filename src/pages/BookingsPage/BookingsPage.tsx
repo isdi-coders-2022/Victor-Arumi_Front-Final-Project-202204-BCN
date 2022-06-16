@@ -76,11 +76,11 @@ const BookingsPage = (): JSX.Element => {
 
   const nextPage = () => {
     setPage(page + 1);
-    setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 70);
+    setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 200);
   };
   const previousPage = () => {
     setPage(page - 1);
-    setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 70);
+    setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 100);
   };
 
   return (
