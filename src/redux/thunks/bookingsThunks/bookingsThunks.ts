@@ -190,7 +190,7 @@ export const addUserToBookingPlayersThunk =
         render: `Has sido añadido a la reserva!`,
         type: "success",
         isLoading: false,
-        autoClose: 800,
+        autoClose: 1300,
       });
       dispatch(getBookingAndPlayersUsernamesThunk(id as string));
     } catch (error: any) {
