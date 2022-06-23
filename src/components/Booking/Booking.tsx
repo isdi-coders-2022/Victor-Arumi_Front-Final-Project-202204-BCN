@@ -19,7 +19,7 @@ import {
   getBookingAndPlayersUsernamesThunk,
 } from "../../redux/thunks/bookingsThunks/bookingsThunks";
 import { useNavigate } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
 
 interface Props {
   booking: IBooking;
@@ -46,12 +46,14 @@ const Booking = ({
     navigate(`/bookings/detail/${id}`);
   };
 
+  const [alreadyAddedUser, setAlreadyAddedUser] = useState(false);
   const addUserToPlayers = (event: React.SyntheticEvent): void => {
     event.stopPropagation();
     dispatch(
       addUserToBookingPlayersThunk(id as string, [...players, userId as string])
     );
     dispatch(getBookingAndPlayersUsernamesThunk(id as string));
+    setAlreadyAddedUser(true);
   };
 
   const userBooking = owner === userId;
@@ -114,7 +116,7 @@ const Booking = ({
           onClick={addUserToPlayers}
           title="Unirse a esta reserva"
           className="add-button"
-          hidden={userBooking || !open}
+          hidden={userBooking || !open || alreadyAddedUser}
         >
           <FontAwesomeIcon icon={faUserPlus} />
         </button>

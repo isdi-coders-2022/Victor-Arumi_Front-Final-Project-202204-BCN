@@ -14,7 +14,7 @@ const BookingsPage = (): JSX.Element => {
 
   const [user, setUser] = useState("");
 
-  const limit = 6;
+  const limit = 8;
   const initialPage = 1;
   const initialType = "";
   const initialStatus = "";

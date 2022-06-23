@@ -29,11 +29,17 @@ const FormStyled = styled.div`
 
   input {
     width: 12rem;
-    height: 1.5rem;
+    height: 2rem;
+    padding-left: 8px;
     margin-top: 4px;
     background-color: #f2f2f2;
     border: 0.05rem #c4c4c4 solid;
     border-radius: 0.25rem;
+
+    &::placeholder {
+      font-size: 11px;
+      color: gray;
+    }
   }
   .submit-button {
     margin-top: 1rem;
@@ -47,6 +53,12 @@ const FormStyled = styled.div`
     font-size: 1rem;
     font-weight: 300;
     cursor: pointer;
+  }
+  .picture-selector {
+    padding-left: 0;
+  }
+  p {
+    text-align: center;
   }
 `;
 

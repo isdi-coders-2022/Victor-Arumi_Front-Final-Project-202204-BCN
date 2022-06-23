@@ -37,6 +37,7 @@ const registerThunk =
         autoClose: 1000,
         closeOnClick: true,
       });
+      return "Error en el registro";
     }
   };
 

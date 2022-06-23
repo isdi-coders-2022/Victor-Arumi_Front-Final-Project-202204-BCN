@@ -21,8 +21,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 
 const BookingDetail = (): JSX.Element => {
-  const { id } = useParams();
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { id } = useParams();
 
   const { booking, playersUsernames } = useAppSelector(
     (state) => state.booking
@@ -36,6 +37,7 @@ const BookingDetail = (): JSX.Element => {
 
   const deleteBooking = () => {
     dispatch(deleteBookingThunk(id as string));
+    setTimeout(() => navigate(-1), 1000);
   };
 
   const addUserToPlayers = () => {
@@ -47,7 +49,6 @@ const BookingDetail = (): JSX.Element => {
     );
     dispatch(getBookingAndPlayersUsernamesThunk(id as string));
   };
-  const navigate = useNavigate();
   const goToEditPage = (): void => navigate(`/bookings/editBooking/${id}`);
 
   const userBooking = booking.owner === userId;
