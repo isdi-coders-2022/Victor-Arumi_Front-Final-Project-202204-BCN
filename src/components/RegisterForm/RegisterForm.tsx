@@ -4,7 +4,7 @@ import "@fontsource/urbanist";
 
 import { IRegisterForm } from "../../types/types";
 import registerThunk from "../../redux/thunks/registerThunk";
-import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
+import { useAppDispatch } from "../../redux/store/hooks";
 import { useNavigate } from "react-router-dom";
 
 const RegisterForm = (): JSX.Element => {
@@ -14,8 +14,9 @@ const RegisterForm = (): JSX.Element => {
     name: "",
     profilePicture: "",
   };
-  const { username } = useAppSelector((state) => state.user);
   const [formData, setFormData] = useState<IRegisterForm>(emptyFormValues);
+  const [submitButtonDisabled, setSubmitButtonDisabled] =
+    useState<boolean>(true);
 
   const changeData = (event: ChangeEvent<HTMLInputElement>): void => {
     setFormData({
@@ -29,7 +30,8 @@ const RegisterForm = (): JSX.Element => {
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const registerSubmit = (event: { preventDefault: () => void }) => {
+
+  const registerSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
 
     const newFormData = new FormData();
@@ -39,15 +41,28 @@ const RegisterForm = (): JSX.Element => {
     newFormData.append("name", formData.name);
     newFormData.append("profilePicture", formData.profilePicture);
 
-    dispatch(registerThunk(newFormData));
-    setFormData(emptyFormValues);
+    const message = await dispatch(registerThunk(newFormData));
+
+    if (message) {
+      return;
+    }
+
+    setTimeout(() => navigate("/login"), 1800);
   };
 
+  const submitEnabled =
+    formData.username.length < 20 &&
+    formData.password.length < 20 &&
+    formData.name.length < 20 &&
+    formData.username.length > 1 &&
+    formData.password.length > 4 &&
+    formData.name.length > 1;
+
   useEffect(() => {
-    if (username) {
-      navigate("/login");
-    }
-  }, [navigate, username]);
+    submitEnabled
+      ? setSubmitButtonDisabled(false)
+      : setSubmitButtonDisabled(true);
+  }, [submitEnabled]);
 
   return (
     <FormStyled>
@@ -56,36 +71,61 @@ const RegisterForm = (): JSX.Element => {
           <label htmlFor="username">
             Nombre de usuario
             <input
+              placeholder="máx. 20 caracteres"
               id="username"
               value={formData.username}
+              maxLength={20}
               onChange={changeData}
             />
           </label>
           <label htmlFor="password">
             Contraseña
             <input
+              placeholder="4 a 20 caracteres"
               id="password"
               type="password"
               value={formData.password}
+              maxLength={20}
               onChange={changeData}
             />
           </label>
           <label htmlFor="name">
             Nombre
-            <input id="name" value={formData.name} onChange={changeData} />
+            <input
+              placeholder="máx. 20 caracteres"
+              id="name"
+              value={formData.name}
+              maxLength={20}
+              onChange={changeData}
+            />
           </label>
           <label htmlFor="profilePicture">
             Imagen de perfil
-            <input id="profilePicture" type="file" onChange={changeData} />
+            <input
+              className="picture-selector"
+              id="profilePicture"
+              type="file"
+              accept="image/*"
+              onChange={changeData}
+            />
           </label>
         </div>
         <button
           className="submit-button"
           type="submit"
           onClick={registerSubmit}
+          disabled={submitButtonDisabled}
         >
           Crear cuenta
         </button>
+        <p
+          className={
+            "w-56  text-red-600 text-sm mb-6 " +
+            (!submitButtonDisabled ? "invisible" : "")
+          }
+        >
+          Completa el formulario según se indica para poder crear la cuenta
+        </p>
       </form>
     </FormStyled>
   );
