@@ -13,10 +13,15 @@ jest.mock("react-redux", () => ({
   useDispatch: () => mockDispatch,
 }));
 
+const usernameInputName = "Nombre de usuario";
+const nameInputName = "Nombre";
+const passwordInputLabelText = "Contraseña";
+const profilePictureInputLabelText = "Imagen de perfil";
+const registerButtonText = "Crear cuenta";
+
 describe("Given a RegisterForm component", () => {
   describe("When the text 'typing...' is typed in the username input field", () => {
     test("Then the value of the username input field shoul be 'typing...", () => {});
-    const usernameInputName = "Nombre de usuario";
     const typedText = "typing...";
 
     render(
@@ -36,10 +41,6 @@ describe("Given a RegisterForm component", () => {
 
   describe("When it's invoked", () => {
     test("Then it should render 2 input fields, a file and a password input and a button with text'Crear cuenta'", () => {
-      const passwordInputLabelText = "Contraseña";
-      const profilePictureInputLabelText = "Imagen de perfil";
-
-      const registerButtonText = "Crear cuenta";
       const inputsNumber = 2;
 
       render(
@@ -73,6 +74,9 @@ describe("Given a RegisterForm component", () => {
   describe("When invoked and the user clicks on 'Crear cuenta' button", () => {
     test("Then it should call dispatch", () => {
       const buttonText = "Crear cuenta";
+      const typedUsername = "username";
+      const typedPassword = "password";
+      const typedName = "name";
 
       render(
         <Provider store={store}>
@@ -81,6 +85,23 @@ describe("Given a RegisterForm component", () => {
           </Router>
         </Provider>
       );
+
+      const usernameInput: HTMLInputElement = screen.getByRole("textbox", {
+        name: usernameInputName,
+      });
+      userEvent.type(usernameInput, typedUsername);
+
+      const passwordInput: HTMLElement = screen.getByLabelText(
+        passwordInputLabelText
+      );
+
+      const nameInput: HTMLInputElement = screen.getByRole("textbox", {
+        name: nameInputName,
+      });
+
+      userEvent.type(usernameInput, typedUsername);
+      userEvent.type(passwordInput, typedPassword);
+      userEvent.type(nameInput, typedName);
 
       const registerButton = screen.getByRole("button", { name: buttonText });
       userEvent.click(registerButton);
