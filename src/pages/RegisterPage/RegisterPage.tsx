@@ -6,7 +6,7 @@ const RegisterPage = (): JSX.Element => {
     <>
       <RegisterForm />
       <p className="text-center">Ya tienes una cuenta?</p>
-      <Link className="text-center" to={"/login"}>
+      <Link className="text-center underline text-customblue" to={"/login"}>
         Inicia sesión
       </Link>
     </>
