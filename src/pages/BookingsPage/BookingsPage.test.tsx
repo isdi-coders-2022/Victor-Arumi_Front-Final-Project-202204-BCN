@@ -5,7 +5,6 @@ import store from "../../redux/store";
 
 import { BrowserRouter } from "react-router-dom";
 import BookingsPage from "./BookingsPage";
-import userEvent from "@testing-library/user-event";
 
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),
@@ -22,8 +21,8 @@ jest.mock("react-redux", () => ({
 }));
 
 describe("Given a BookingsPage component", () => {
-  describe("When it's invoked and the user clicks on all buttons", () => {
-    test("Then it should render a level 1 heading with text 'Todas las reservas' and dispatch should be called 6 times", () => {
+  describe("When it's invoked and the user clicks on all buttons (filter and pagination buttons)", () => {
+    test("Then it should render a level 1 heading with text 'Todas las reservas'and 6 buttons with specific texts 'Outdoor, Indoor, Res. Abierta, Fecha, Siguiente, Anterior', and dispatch should be called 6 times (1 time per click)", () => {
       const headingText = "Todas las reservas";
 
       jest.spyOn(global, "setTimeout");
@@ -48,21 +47,17 @@ describe("Given a BookingsPage component", () => {
       const nextButton = screen.getByRole("button", { name: "Siguiente" });
       const previousButton = screen.getByRole("button", { name: "Anterior" });
 
-      userEvent.click(outdoorButton);
-      userEvent.click(indoorButton);
-      userEvent.click(openButton);
+      const buttons = screen.getAllByRole("button");
+      buttons.forEach((button) => fireEvent.click(button));
       fireEvent.change(dateButton, { target: { value: "2020-05-12" } });
-      userEvent.click(nextButton);
-      userEvent.click(previousButton);
 
+      expect(heading).toBeInTheDocument();
       expect(outdoorButton).toBeInTheDocument();
       expect(indoorButton).toBeInTheDocument();
       expect(openButton).toBeInTheDocument();
       expect(dateButton).toBeInTheDocument();
       expect(nextButton).toBeInTheDocument();
       expect(previousButton).toBeInTheDocument();
-
-      expect(heading).toBeInTheDocument();
 
       expect(mockDispatch).toHaveBeenCalledTimes(6);
     });
