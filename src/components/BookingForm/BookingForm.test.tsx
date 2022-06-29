@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
 import store from "../../redux/store";
@@ -17,7 +17,7 @@ jest.mock("react-redux", () => ({
 describe("Given a CreateBooking component", () => {
   describe("When it's invoked", () => {
     test("Then it should render 5 selects and 3 buttons", () => {
-      const totalButtons = 3;
+      const totalButtons = 4;
       const totalSelects = 5;
 
       render(
@@ -47,12 +47,15 @@ describe("Given a CreateBooking component", () => {
       render(
         <BrowserRouter>
           <Provider store={store}>
-            <BookingForm booking={mockBookings[0]} usernames={[]} />
+            <BookingForm
+              booking={mockBookings[0]}
+              usernames={["John", "Mark", "Roger", "Nick"]}
+            />
           </Provider>
         </BrowserRouter>
       );
 
-      const loginButton = screen.getByRole("button", {
+      const createBooking = screen.getByRole("button", {
         name: CreateBookingButtonText,
       });
       const indoorButton = screen.getByRole("button", {
@@ -61,11 +64,22 @@ describe("Given a CreateBooking component", () => {
       const outdoorButton = screen.getByRole("button", {
         name: outdoorButtonText,
       });
+      const toggleOpenBookingButton = screen.getByRole("button", {
+        name: "Abrir o Cerrar partida",
+      });
+      const clubSelect = screen.getByRole("combobox", { name: "Club" });
 
-      userEvent.click(loginButton);
-      userEvent.click(indoorButton);
       userEvent.click(outdoorButton);
+      userEvent.click(outdoorButton);
+      userEvent.click(indoorButton);
+      userEvent.click(indoorButton);
+      fireEvent.change(clubSelect, { target: { value: "RCTB" } });
 
+      userEvent.click(toggleOpenBookingButton);
+      userEvent.click(toggleOpenBookingButton);
+      userEvent.click(createBooking);
+
+      expect(clubSelect).toBeInTheDocument();
       expect(mockDispatch).toHaveBeenCalled();
     });
   });
