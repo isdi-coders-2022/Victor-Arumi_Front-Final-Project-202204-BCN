@@ -72,7 +72,7 @@ const BookingForm = ({
 
     const formData = {
       owner: inputsData.owner,
-      club: inputsData.club ?? "RCTB",
+      club: inputsData.club,
       date: inputsData.date,
       hour: inputsData.hour,
       courtType: currentCourtType ? "Indoor" : "Outdoor",
@@ -272,7 +272,9 @@ const BookingForm = ({
 
         <div className="flex my-5">
           <p className="mx-4">Partida {displayedBookingStatus()}</p>
-          <div
+          <button
+            type="button"
+            title="Abrir o Cerrar partida"
             className={
               "md:w-14 md:h-7 w-12 h-6 flex items-center bg-customblue rounded-full p-1 cursor-pointer " +
               (checkIfBookingIsFull()
@@ -290,7 +292,7 @@ const BookingForm = ({
                 (openBooking ? openToggleClass : "")
               }
             ></div>
-          </div>
+          </button>
         </div>
         <button
           className=" my-4 rounded-3xl inline-block px-7 py-3 bg-customblue text-white font-medium text-sm leading-snug uppercase hover:bg-customblue focus:bg-customblue focus:outline-none focus:ring-0 transition duration-150 disabled:bg-customblue/60 ease-in-out"
