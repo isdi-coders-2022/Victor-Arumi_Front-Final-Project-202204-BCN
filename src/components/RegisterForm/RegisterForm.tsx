@@ -54,9 +54,9 @@ const RegisterForm = (): JSX.Element => {
     formData.username.length < 20 &&
     formData.password.length < 20 &&
     formData.name.length < 20 &&
-    formData.username.length > 1 &&
-    formData.password.length > 4 &&
-    formData.name.length > 1;
+    formData.username.length > 0 &&
+    formData.password.length > 3 &&
+    formData.name.length > 0;
 
   useEffect(() => {
     submitEnabled

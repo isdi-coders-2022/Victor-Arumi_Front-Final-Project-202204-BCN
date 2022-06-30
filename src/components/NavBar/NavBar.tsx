@@ -7,9 +7,8 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
 function NavBar() {
-  const { logged, profilePictureBackup, username } = useAppSelector(
-    (state) => state.user
-  );
+  const { logged, profilePicture, profilePictureBackup, username } =
+    useAppSelector((state) => state.user);
 
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useAppDispatch();
@@ -22,6 +21,12 @@ function NavBar() {
     dispatch(logOutActionCreator());
     setIsOpen(!isOpen);
     toast.success("Sesión cerrada, vuelve pronto!");
+  };
+
+  const url = process.env.REACT_APP_API_URL;
+
+  const pictureUrlOnError = (error: any) => {
+    (error.target as HTMLImageElement).src = profilePictureBackup;
   };
 
   return (
@@ -162,8 +167,9 @@ function NavBar() {
                 <div className="flex-shrink-0">
                   <img
                     className="h-10 w-10 border border-customblue rounded-full bg-white"
-                    src={profilePictureBackup}
+                    src={`${url}uploads/images/${profilePicture}`}
                     alt="Foto de perfil"
+                    onError={pictureUrlOnError}
                   />
                 </div>
               </div>
