@@ -45,7 +45,9 @@
     "test-coverage": "npm run test -- --coverage --watchAll=false",
     "test-running": "jest --watchAll",
     "eject": "react-scripts eject",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run"
   },
   "eslintConfig": {
     "extends": [
@@ -69,6 +71,9 @@
     "@tailwindcss/forms": "^0.5.2",
     "@types/react-test-renderer": "^18.0.0",
     "autoprefixer": "^10.4.7",
+    "cypress": "^10.3.0",
+    "cypress-file-upload": "^5.0.8",
+    "eslint-plugin-cypress": "^2.12.1",
     "husky": "^7.0.0",
     "postcss": "^8.4.14",
     "tailwindcss": "^3.0.24"
