@@ -30,13 +30,14 @@ describe("Given a NavBar component", () => {
       </Provider>
     );
 
-    const button = screen.getByRole("button");
+    const menuButton = screen.getByRole("button", { name: "Menú" });
     const totalLinks = screen.getAllByRole("link");
     const registerLink = screen.getByRole("link", { name: "Crear cuenta" });
     const loginLink = screen.getByRole("link", { name: "Iniciar sesión" });
-    userEvent.click(button);
+    userEvent.click(menuButton);
+    userEvent.click(registerLink);
 
-    expect(button).toBeInTheDocument();
+    expect(menuButton).toBeInTheDocument();
     expect(registerLink).toBeInTheDocument();
     expect(loginLink).toBeInTheDocument();
     expect(totalLinks).toHaveLength(expectedLinks);
