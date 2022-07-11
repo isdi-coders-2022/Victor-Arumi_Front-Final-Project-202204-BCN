@@ -33,6 +33,7 @@ const LoginForm = (): JSX.Element => {
           <label htmlFor="username">
             Nombre de usuario
             <input
+              name="Nombre de usuario"
               id="username"
               value={formData.username}
               onChange={changeData}
@@ -41,6 +42,7 @@ const LoginForm = (): JSX.Element => {
           <label htmlFor="password">
             Contraseña
             <input
+              name="Contraseña"
               id="password"
               type="password"
               value={formData.password}
